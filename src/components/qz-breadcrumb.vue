@@ -1,0 +1,47 @@
+<!--公用组件：面包屑
+   /**
+   * qz-breadcrumb
+   * @module components/qz-breadcrumb.vue
+   * @desc 面包屑
+   * @author lihong
+   * @date 2018年08月13日16:45:37
+   * @example
+   *  <qzBreadcrumb></qzBreadcrumb>
+   */
+-->
+<template>
+  <div class="breadcrumb">
+      <span v-for="(item,index) in $route.matched" :key="item.path" v-if="index !== 0">
+        {{ item.name }}
+        <i v-if="index !== $route.matched.length-1" class="el-icon-arrow-right"></i>
+        <span v-if="item.path === '/partnersDetail'"><i class="el-icon-arrow-right"></i>{{$store.state.selectName}}</span>
+      </span>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'qz-breadcrumb',
+    components: {
+    },
+    props: {},
+    data() {
+      return {
+      }
+    },
+    mounted () {},
+    methods: {
+    }
+  }
+</script>
+<style lang="less" scoped>
+  .breadcrumb{
+    display: flex;
+    justify-content: flex-start;
+    max-width: @maxWidth;
+    margin: 0 auto;
+    padding: 15*@base 20*@base;
+    font-size: 12*@base;
+    color: rgba(39,52,75,0.60);
+  }
+</style>
