@@ -10,7 +10,6 @@ function addStyleResource(rule) {
     });
 }
 module.exports = {
-  // baseUrl: '/elensoffical/',
   baseUrl: '/',
   outputDir: 'dist',
 
@@ -18,4 +17,19 @@ module.exports = {
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal'];
     types.forEach(type => addStyleResource(config.module.rule('less').oneOf(type)));
   },
+  devServer: {
+    proxy: {
+        '/api': {
+            // 目标 API 地址
+            target: 'http://192.168.1.169:11445/',
+            // 如果要代理 websockets
+            ws: true,
+            // 将主机标头的原点更改为目标URL
+            changeOrigin: true,
+            pathRewrite: {
+                '^/api': ''
+            },
+        }
+    }
+}
 };

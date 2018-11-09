@@ -1,26 +1,26 @@
 <template>
   <div>
-    <qzCard class="newsDetail">
+    <Card class="newsDetail">
       <div class="title">
         <h1>{{newsDetail.title}}</h1>
         <div class="back" @click="goBack"><span>返回</span></div>
       </div>
         <div class="infos">
-          <span>来源：-</span>
-          <span>作者：-</span>
-          <span>发布时间：-</span>
+          <span>来源：{{newsDetail.category}}</span>
+          <span>作者：{{newsDetail.author}}</span>
+          <span>发布时间：{{newsDetail.publishTime}}</span>
         </div>
         <p>{{newsDetail.content}}</p>
-    </qzCard>
+    </Card>
   </div>
 </template>
 
 <script>
-import qzCard from '@/components/qz-card.vue'
+import Card from '@/components/Card.vue'
 export default {
   name: 'newsDetail',
   components:{
-    qzCard
+    Card
   },
   data () {
     return {
@@ -34,11 +34,11 @@ export default {
   },
   methods: {
     getNewsDetail() {
-    //   this.$ajax.get(this.$api.news_detials,{
-    //     id: this.newsId
-    //   }).then(res=>{
-    //     this.newsDetail = res.data
-    //   })
+      this.$ajax.get(this.$api.selectNewsDetail,{
+        id: this.newsId
+      }).then(res=>{
+        this.newsDetail = res.data.data
+      })
     },
     goBack() {
       this.$router.go(-1)

@@ -15,20 +15,18 @@
 -->
 <template>
   <div class="header">
-    <img width="46" :src="logo" />
-    <h1>{{title}}</h1>
+    <h1>登录|请注册</h1>
   </div>
 </template>
 
 <script>
-import logo from '../assets/imgs/logo.png'
 export default {
   name: 'Topbar',
   components: {},
   props: {
     title: {
       type: String,
-      default: '一览群智·中电传媒人物关系图谱'
+      default: '许昌电台'
     },
     userName: {
       type: String
@@ -39,7 +37,6 @@ export default {
   },
   data() {
     return {
-      logo: logo,
       searchValue: '',
       isSelectShow: false,
       isSubMenuShow: false,

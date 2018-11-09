@@ -14,7 +14,6 @@
       <span v-for="(item,index) in $route.matched" :key="item.path" v-if="index !== 0">
         {{ item.name }}
         <i v-if="index !== $route.matched.length-1" class="el-icon-arrow-right"></i>
-        <span v-if="item.path === '/partnersDetail'"><i class="el-icon-arrow-right"></i>{{$store.state.selectName}}</span>
       </span>
   </div>
 </template>
@@ -27,6 +26,7 @@
     props: {},
     data() {
       return {
+        peopleName: localStorage.getItem('peopleName')
       }
     },
     mounted () {},

@@ -1,7 +1,7 @@
 export const BASE_URL = process.env.NODE_ENV === 'development'
   // ? 'http://192.168.1.25:8080/wwj_relation/'
-   ? 'http://124.204.65.86:58080/wwj_relation/'
-  : '/wwj_relation'
+   ? '/api'
+  : '/'
 
 export const ERR_OK = 0
 
