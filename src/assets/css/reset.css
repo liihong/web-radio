@@ -8,7 +8,7 @@ KISSY CSS Reset
  */
  body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
  body, button, input, select, textarea {
-   font:14px/1.5 "Microsoft YaHei","微软雅黑","Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB",Arial,sans-serif,tahoma, arial, \5b8b\4f53;
+   font:16px/1.5 "Microsoft YaHei","微软雅黑","Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB",Arial,sans-serif,tahoma, arial, \5b8b\4f53;
  }
  h1, h2, h3, h4, h5, h6{ font-size:100%; font-weight: normal;}
  strong,b,th{font-weight:normal;}
@@ -96,4 +96,10 @@ html{
 
  .pointer{
   cursor:pointer
+ }
+
+ .flex{
+   display: flex;
+   justify-content: center;
+   align-items: center;
  }

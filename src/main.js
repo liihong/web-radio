@@ -7,8 +7,8 @@ import ajax from './utils/ajax'
 import './utils/flexible' // 初始化HTML的font-size
 import './assets/css/reset.css' // 初始化样式
 import util from './utils/util' // 统一加载通用方法对象
-
-import mock from './mock/mock'
+import './assets/iconfont/iconfont.css'
+import mock from './api/mock/mock'
 Vue.use(mock)
 
 Vue.config.productionTip = false
@@ -19,6 +19,9 @@ Vue.use(VueInstant)
 
 import Advertising from './components/Advertising.vue'
 Vue.component('Advertising', Advertising)
+import Card from './components/Card.vue'
+Vue.component('Card', Card)
+
 
 Vue.prototype.$ajax = ajax
 Vue.prototype.$api = api

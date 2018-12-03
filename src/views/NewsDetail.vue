@@ -6,11 +6,11 @@
         <div class="back" @click="goBack"><span>返回</span></div>
       </div>
         <div class="infos">
-          <span>来源：{{newsDetail.category}}</span>
-          <span>作者：{{newsDetail.author}}</span>
-          <span>发布时间：{{newsDetail.publishTime}}</span>
+          <span>来源：{{newsDetail.describes}}</span>
+          <!-- <span>作者：{{newsDetail.author}}</span> -->
+          <span>发布时间：{{newsDetail.createAt}}</span>
         </div>
-        <p>{{newsDetail.content}}</p>
+        <p v-html="newsDetail.content"></p>
     </Card>
   </div>
 </template>
@@ -34,10 +34,10 @@ export default {
   },
   methods: {
     getNewsDetail() {
-      this.$ajax.get(this.$api.selectNewsDetail,{
+      this.$ajax.get(this.$api.getNewsDetail,{
         id: this.newsId
       }).then(res=>{
-        this.newsDetail = res.data.data
+        this.newsDetail = res.data.content
       })
     },
     goBack() {

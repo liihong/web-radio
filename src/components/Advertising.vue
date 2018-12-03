@@ -1,6 +1,6 @@
 <template>
   <div class="advertising">
-    <img :src="src">
+    <img :src="src" width="100%">
   </div>
 </template>
 

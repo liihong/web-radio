@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>IconFont</title>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="iconfont.css">
+</head>
+<body>
+    <div class="main markdown">
+        <h1>IconFont 图标</h1>
+        <ul class="icon_lists clear">
+            
+                <li>
+                <i class="icon iconfont icon-morentouxiang"></i>
+                    <div class="name">默认头像</div>
+                    <div class="fontclass">.icon-morentouxiang</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-highspeed"></i>
+                    <div class="name">高速</div>
+                    <div class="fontclass">.icon-highspeed</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-dianfei"></i>
+                    <div class="name">电费</div>
+                    <div class="fontclass">.icon-dianfei</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-kejian"></i>
+                    <div class="name">可见</div>
+                    <div class="fontclass">.icon-kejian</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-bofangqi-bofangxiaodianshi"></i>
+                    <div class="name">播放器-播放（小电视）</div>
+                    <div class="fontclass">.icon-bofangqi-bofangxiaodianshi</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-bofangqi-zantingxiaodianshi"></i>
+                    <div class="name">播放器-暂停（小电视）</div>
+                    <div class="fontclass">.icon-bofangqi-zantingxiaodianshi</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-gongjijin"></i>
+                    <div class="name">公积金</div>
+                    <div class="fontclass">.icon-gongjijin</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-daba"></i>
+                    <div class="name">大巴</div>
+                    <div class="fontclass">.icon-daba</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-yibaochaxun"></i>
+                    <div class="name">医保查询</div>
+                    <div class="fontclass">.icon-yibaochaxun</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-bofang"></i>
+                    <div class="name">播放</div>
+                    <div class="fontclass">.icon-bofang</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-fangjia"></i>
+                    <div class="name">放假</div>
+                    <div class="fontclass">.icon-fangjia</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-feiji"></i>
+                    <div class="name">飞机</div>
+                    <div class="fontclass">.icon-feiji</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-zaixianjiaoyi"></i>
+                    <div class="name">在线交易</div>
+                    <div class="fontclass">.icon-zaixianjiaoyi</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-huoche"></i>
+                    <div class="name">火车</div>
+                    <div class="fontclass">.icon-huoche</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-zanting"></i>
+                    <div class="name">暂停</div>
+                    <div class="fontclass">.icon-zanting</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon--"></i>
+                    <div class="name">播放器_声音</div>
+                    <div class="fontclass">.icon--</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-yiliaohangyedeICON-"></i>
+                    <div class="name">公交车</div>
+                    <div class="fontclass">.icon-yiliaohangyedeICON-</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-yanglaobaoxian"></i>
+                    <div class="name">养老保险</div>
+                    <div class="fontclass">.icon-yanglaobaoxian</div>
+                </li>
+            
+        </ul>
+
+        <h2 id="font-class-">font-class引用</h2>
+        <hr>
+
+        <p>font-class是unicode使用方式的一种变种，主要是解决unicode书写不直观，语意不明确的问题。</p>
+        <p>与unicode使用方式相比，具有如下特点：</p>
+        <ul>
+        <li>兼容性良好，支持ie8+，及所有现代浏览器。</li>
+        <li>相比于unicode语意明确，书写更直观。可以很容易分辨这个icon是什么。</li>
+        <li>因为使用class来定义图标，所以当要替换图标时，只需要修改class里面的unicode引用。</li>
+        <li>不过因为本质上还是使用的字体，所以多色图标还是不支持的。</li>
+        </ul>
+        <p>使用步骤如下：</p>
+        <h3 id="-fontclass-">第一步：引入项目下面生成的fontclass代码：</h3>
+
+
+        <pre><code class="lang-js hljs javascript"><span class="hljs-comment">&lt;link rel="stylesheet" type="text/css" href="./iconfont.css"&gt;</span></code></pre>
+        <h3 id="-">第二步：挑选相应图标并获取类名，应用于页面：</h3>
+        <pre><code class="lang-css hljs">&lt;<span class="hljs-selector-tag">i</span> <span class="hljs-selector-tag">class</span>="<span class="hljs-selector-tag">iconfont</span> <span class="hljs-selector-tag">icon-xxx</span>"&gt;&lt;/<span class="hljs-selector-tag">i</span>&gt;</code></pre>
+        <blockquote>
+        <p>"iconfont"是你项目下的font-family。可以通过编辑项目查看，默认是"iconfont"。</p>
+        </blockquote>
+    </div>
+</body>
+</html>

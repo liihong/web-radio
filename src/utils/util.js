@@ -140,7 +140,7 @@ util.getNowFormatDate = function () {
 
 util.sameNameId = function (a) {
   let m = []
-  a.map(function (item, index) {
+  a.map(function (item) {
     let o = {}
     o.name = item
     o.id = item
@@ -150,7 +150,7 @@ util.sameNameId = function (a) {
 }
 util.oneArray = function (o, m) {
   if (!m) {
-    if (o instanceof Array) {} else {
+    if (o instanceof Array) {return} else {
       let os = []
       os.push(o)
       return os
@@ -221,7 +221,6 @@ util.sumArrayObj = function (array, key) {
 util.arrayFilter = function (arr, value) {
   let newArr = new Array()
   arr.forEach(item => {
-    let flag = false
     for (let key in item) {
       if (item[key].length > 0) {
         if (item[key].toString().toLowerCase().indexOf(value.toLowerCase()) != -1) {
@@ -256,5 +255,12 @@ util.groupArray = function (arr) {
     }
   }
   return dest
+}
+util.isNotEmpty = function (str) {
+  let flag = false
+  if(str != null && str != undefined && str != '') {
+      flag = true
+  }
+  return flag
 }
 export default util

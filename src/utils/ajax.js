@@ -13,7 +13,8 @@ const CancelToken = axios.CancelToken
 axios.defaults.baseURL = BASE_URL
 // 设置默认请求头
 axios.defaults.headers = {
-    'X-Requested-With': 'XMLHttpRequest'
+    // 'X-Requested-With': 'XMLHttpRequest'
+    'Access-Control-Allow-Origin': '*'
 }
 
 axios.defaults.timeout = TIMEOUT

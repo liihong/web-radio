@@ -15,7 +15,7 @@ export default new Router({
       children: [{
           path: '/index',
           name: '首页',
-          component: () => import(/* webpackChunkName: 'Home' */ './views/Home')
+          component: () => import(/* webpackChunkName: 'Home' */ './views/home/Home')
         },
         {
           path: '/newDetail',
