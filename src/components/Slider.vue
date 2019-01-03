@@ -2,6 +2,7 @@
   <div class="div_Scroll" ref="div_Scroll">
     <swiper :options="swiperOption" ref="mySwiper">
       <swiperSlide v-for="(item,iIndex) in picList" :key="iIndex">
+        <a  target="_blank" class="pointer" :href="item.weblinkAddress">
         <div class="swiper-content">
           <div class="cover">
              <img v-if="$util.isNotEmpty(item.cfImage)" :src="`${$api.IMG_URL}${item.cfImage}`">
@@ -9,6 +10,7 @@
             </div>
           <div class="title">{{item.title}}</div>
         </div>
+        </a>
       </swiperSlide>
 
     </swiper>

@@ -4,7 +4,7 @@
       <div class="name">
         <span>{{name}}</span>
       </div>
-      <div v-show="more!=''" class="more">{{more}}</div>
+      <div @click="moreClick" v-show="more!=''" class="more pointer">{{more}}</div>
     </div>
     <div class="content">
       <slot></slot>
@@ -27,6 +27,11 @@ export default {
   },
   data() {
     return {}
+  },
+  methods: {
+    moreClick() {
+      this.$emit('moreClick')
+    }
   }
 }
 </script>

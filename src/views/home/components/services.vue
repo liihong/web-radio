@@ -85,7 +85,6 @@ export default {
 </script>
 <style lang="less" scoped>
 .services {
-   margin-left: 10*@base;
    margin-top:10*@base;
    background: #F6F8FB;
   .gy-ul_bbx {

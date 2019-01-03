@@ -11,8 +11,8 @@
 -->
 <template>
   <div class="breadcrumb">
-      <span v-for="(item,index) in $route.matched" :key="item.path" v-if="index !== 0">
-        {{ item.name }}
+      <span v-for="(item,index) in $route.matched" :key="item.path">
+        {{ item.name == 'XX' ? $store.state.peopeleName : item.name }}
         <i v-if="index !== $route.matched.length-1" class="el-icon-arrow-right"></i>
       </span>
   </div>
@@ -26,10 +26,10 @@
     props: {},
     data() {
       return {
-        peopleName: localStorage.getItem('peopleName')
       }
     },
-    mounted () {},
+    mounted () {
+    },
     methods: {
     }
   }
@@ -41,7 +41,6 @@
     max-width: @maxWidth;
     margin: 0 auto;
     padding: 15*@base 20*@base;
-    font-size: 12*@base;
     color: rgba(39,52,75,0.60);
   }
 </style>

@@ -1,16 +1,17 @@
 <template>
   <div>
     <Card class="newsDetail">
-      <div class="title">
+      <div class="news-title">
         <h1>{{newsDetail.title}}</h1>
-        <div class="back" @click="goBack"><span>返回</span></div>
+        <div class="back pointer" @click="goBack"><span>返回</span></div>
       </div>
         <div class="infos">
-          <span>来源：{{newsDetail.describes}}</span>
+          <span>来源：{{newsDetail.scoure}}</span>
           <!-- <span>作者：{{newsDetail.author}}</span> -->
-          <span>发布时间：{{newsDetail.createAt}}</span>
+          <span>发布时间：{{newsDetail.sendDate}}</span>
         </div>
         <p v-html="newsDetail.content"></p>
+        <div class="share"></div>
     </Card>
   </div>
 </template>
@@ -34,7 +35,7 @@ export default {
   },
   methods: {
     getNewsDetail() {
-      this.$ajax.get(this.$api.getNewsDetail,{
+      this.$ajax.get(this.$api.getNewsDetail, {
         id: this.newsId
       }).then(res=>{
         this.newsDetail = res.data.content
@@ -52,12 +53,12 @@ export default {
 <style lang="less" scoped>
 .newsDetail{
   padding:36*@base 30*@base;
-  .title{
+  .news-title{
     display: flex;
     h1{
       flex:1;
-      font-family: PingFangSC-Medium;
-      font-size: 22*@base;
+      font-weight: 900;
+      font-size: 26*@base;
       text-align: center;
       color: #2F3B4E;
     }

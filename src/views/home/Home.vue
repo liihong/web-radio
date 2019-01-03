@@ -4,12 +4,12 @@
     <Advertising :src="Advertising1" />
     <div class="row1">
       <h1>
-        <router-link :to="{ path: 'newDetail', query: { id: topNews.id }}" target="_blank">
-          {{topNews.title}}
+        <router-link :to="{ path: 'newsDetail', query: { id: topNews.id }}" target="_blank">
+          {{topNews.title.length> 30 ? topNews.title.substr(0,30) : topNews.title}}
         </router-link>
       </h1>
       <div class="subHeadline">
-        <router-link target="_blank" :to="{ path: 'newDetail', query: { id: topNewsTwo.id }}" v-for="(item, $index) in topNewsTwo" :key="$index">{{item.title}} &nbsp;&nbsp;&nbsp;</router-link>
+        <router-link target="_blank" :to="{ path: 'newsDetail', query: { id: topNewsTwo.id }}" v-for="(item, $index) in topNewsTwo" :key="$index">{{item.title}} &nbsp;&nbsp;&nbsp;</router-link>
       </div>
       <span class="toutiao"></span>
 
@@ -19,15 +19,15 @@
       <div class="newsTab">
         <div class="newsTitle">
           <h1>许昌新闻</h1>
-          <NewsCard :newsList="newsList['guoji']" class="blockxc"></NewsCard>
+          <NewsCard :newsList="newsList['19']" class="blockxc" @moreClick="moreClick('19')"></NewsCard>
         </div>
       </div>
     </div>
     <div class="line2">
       <div class="block1">
-        <NewsCard name="要闻推荐" :newsList="newsList['jiaodian']"></NewsCard>
+        <NewsCard name="要闻推荐" :newsList="newsList['20']" @moreClick="moreClick('20')"></NewsCard>
         <Advertising :src="Advertising2" />
-        <NewsCard name="电台活动" :newsList="newsList['shengshi']"></NewsCard>
+        <NewsCard name="电台活动" :newsList="newsList['21']" @moreClick="moreClick('21')"></NewsCard>
       </div>
       <div class="block2">
         <Card name="在线收听" more="">
@@ -39,9 +39,9 @@
       </div>
     </div>
     <div class="line2">
-      <NewsCard name="汽车" showImg :newsList="newsList['jiankang']" class="block1"></NewsCard>
-      <NewsCard name="健康" showImg :newsList="newsList['lvyou']" class="block1"></NewsCard>
-      <NewsCard name="旅游" showImg :newsList="newsList['qiche']" class="block1"></NewsCard>
+      <NewsCard name="汽车" showImg :newsList="newsList['22']" class="block1" @moreClick="moreClick('22')"></NewsCard>
+      <NewsCard name="健康" showImg :newsList="newsList['23']" class="block1" @moreClick="moreClick('23')"></NewsCard>
+      <NewsCard name="旅游" showImg :newsList="newsList['24']" class="block1" @moreClick="moreClick('24')"></NewsCard>
     </div>
     <div class="line2">
       <Card name="主持人">
@@ -92,8 +92,12 @@ export default {
     this.sliderlist()
     this.newslist()
     this.getPeopleList()
+    this.getTopNews()
   },
   methods: {
+    moreClick(id) {
+      this.$router.push({path: '/newsList', query: { id }})
+    },
     sliderlist() {
       this.$ajax
         .get(this.$api.getHome)
@@ -119,11 +123,19 @@ export default {
     },
     getPeopleList() {
       this.$ajax.get(this.$api.getPeopleList).then(res => {
-        console.log(res.data)
         if (res.data.status === 200) {
           this.peopleList = res.data.content.presenters
         } else {
           console.log('主持人数据获取失败!')
+        }
+      })
+    },
+    getTopNews() {
+      this.$ajax.get(this.$api.getTopOne).then(res => {
+        if (res.data.status === 200) {
+          this.topNews = res.data.content.topOne
+        } else {
+          console.log('头条数据获取失败!')
         }
       })
     }
@@ -177,20 +189,22 @@ export default {
           border-bottom: 1px solid @themeColor;
           background: #cccccc;
         }
+        .blockxc {
+          margin-left: 15 * @base;
+          flex: 0.7;
+        }
       }
     }
   }
   .line2 {
     display: flex;
-    .blockxc {
-      margin-left: 15 * @base;
-      flex: 0.7;
-    }
     .block1 {
       flex: 0.7;
+      margin:10*@base;
     }
     .block2 {
       flex: 0.3;
+      margin:10*@base;
     }
   }
 }

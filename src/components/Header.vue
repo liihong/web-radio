@@ -105,6 +105,7 @@ export default {
       }
       return newObj
     })
+    this.activeMenu = this.$route.path
   },
   methods: {
     handleCommand(command) {
