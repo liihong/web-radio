@@ -55,8 +55,8 @@ export default {
       this.$ajax
         .get(this.$api.getNewsByType, {
           id: typeid,
-          pn: this.pageNumber,
-          size: this.pageSize
+          'page.pn': this.pageNumber,
+          'page.size': this.pageSize
         })
         .then(res => {
           if (res.data && res.data.content) {

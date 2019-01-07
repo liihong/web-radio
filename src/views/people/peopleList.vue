@@ -1,8 +1,8 @@
 <template>
     <div class="peopleList">
-        <el-row class="list">
-            <el-col :span="6" v-for="(item,index) in peopleList" :key="index" :offset="index > 0 ? 2 : 0">
-                <div @click="openDetail(item.id)">
+        <el-row class="list"  :gutter="20">
+            <el-col :span="8" v-for="(item,index) in peopleList" :key="index">
+                <div class="pointer" @click="openDetail(item.id)">
                      <div class="cover">
                      <img v-if="$util.isNotEmpty(item.pImage)" :src="`${$api.IMG_URL}${item.pImage}`">
                      <img v-else src="../../assets/imgs/unknown.svg">
@@ -60,7 +60,7 @@ export default {
       margin: 8 * @base 0;
       overflow: hidden;
       img {
-        height: 100%;
+        // height: 100%;
         width: 100%;
         left: 50%;
         position: relative;

@@ -46,9 +46,13 @@ export default {
   getNoticeByChannelId: '/channel/getNoticeByChannelId',
 
   // 获取专题信息信息
-  getTopic: '/specials/getSpecials',
+  getTopic: '/specials//getZhuantis',
+
+  getSpecial: '/specials/getSpecials',
+
+  getNewsSpecial: '/specials/getSpecial',
   // 获取专题详情
-  getTopicDetail: '/specials/getSpecial',
+  getTopicDetail: '/specials/getZhuanti',
 
   getVideos: '/videos/getVideos',
 

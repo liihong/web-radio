@@ -24,14 +24,11 @@
                     <h1>互联网视听节目服务（AVSP）：豫网备2014001号</h1>
                     <br>
                     <a target="_blank">ICP备案许可证号：豫ICP备11032567号</a>
-                    <a target="_blank">法律顾问：河南许都律师事务所</a>
+                    <!-- <a target="_blank">法律顾问：河南许都律师事务所</a> -->
                     <br>
                     <h1> 网站不良信息举报电话：0374-5055866</h1>
                     <h1> 举报邮箱：xcgbw2011@163.com</h1>
                     <br>
-                    <!-- <h target="_blank">技术支持：
-                        <a href="http://www.zgynet.cn/" target="_blank">河南中广云软件科技有限公司</a>
-                    </h1> -->
                 </span>
             </div>
         </div>

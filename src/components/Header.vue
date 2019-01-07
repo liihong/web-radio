@@ -44,7 +44,7 @@
         <div v-show="suggestions.length > 0" class="el-input-group__append">
           <ul class="vue-instant__suggestions">
             <li @click="selected(item)" :class="{'highlighted__custom':$index==index}" v-for="(item,$index) in suggestions" :key="$index">{{item.personName}}
-              <span>籍贯：{{item.birthPlace}}</span>
+              <span>{{item.birthPlace}}</span>
             </li>
           </ul>
         </div>

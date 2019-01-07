@@ -2,7 +2,7 @@
   <div class="newsSwiper">
     <swiper :options="newsOption" ref="newsSwiper">
       <swiperSlide v-for="(item,iIndex) in picData" :key="iIndex">
-        <div class="swiper-content">
+        <div class="swiper-content"  @click="openDetail(item.id)">
           <div class="cover">
             <img v-if="$util.isNotEmpty(item.pImage)" :src="`${$api.IMG_URL}${item.pImage}`">
             <img v-else src="../../../assets/imgs/people.svg">
@@ -48,7 +48,11 @@ export default {
   },
   mounted() {
   },
-  methods: {}
+  methods: {
+    openDetail(id) {
+      this.$router.push({ path: '/peopleDetail', query: { id: id } })
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -92,16 +96,16 @@ export default {
   .swiper-container {
     width: 100%;
     text-align: center;
+    overflow: hidden;
   }
 
   .swiper-content {
     margin: 5px;
     background: #ffffff;
-    box-shadow: 0 1px 3px 0 rgba(143, 16, 27, 0.29);
     img {
       height: 100%;
     //   width: 180 * @base;
-      left: 50%;
+      left: 30%;
       position: relative;
       transform: translateX(-50%);
     }

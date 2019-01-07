@@ -1,6 +1,6 @@
 <template>
   <div class="advertising">
-    <img :src="src" width="100%">
+    <a  target="_blank" class="pointer" :href="item.weblinkAddress"><img :src="`${$api.IMG_URL}${item.cfImage}`" width="100%"></a>
   </div>
 </template>
 
@@ -12,6 +12,9 @@ export default {
       type: String,
       default: ''
     },
+    item: {
+      type: Object
+    },
     width: {
       type: String,
       default: '1200'
@@ -19,6 +22,8 @@ export default {
   },
   data() {
     return {}
+  },
+  mounted() {
   }
 }
 </script>

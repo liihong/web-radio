@@ -1,13 +1,13 @@
 <template>
   <div>
-    <Card :name="name" @moreClick="moreClick">
+    <Card :name="textName" @moreClick="moreClick">
       <div class="news-wrapper" v-cloak>
         <div ref="newsBox" class="news-box">
           <div class="cover" v-show="showImg && imgSrc">
             <img :src="imgSrc">
           </div>
           <ul>
-            <li class="clearFix" v-for="(news, index) in newsList" :key="index" v-if="index < 6">
+            <li class="clearFix" v-for="(news, index) in newsList" :key="index" v-if="index < count">
               <router-link class="link" :to="{ path: 'newsDetail', query: { id: news.id }}">
                 <div class="newstxt-title">{{news.title}}</div>
                 <div v-show="!showImg" class="time">{{news.sendDate}}</div>
@@ -32,12 +32,19 @@ export default {
       type: String,
       default: ''
     },
+    newTypes: {
+      type: Object
+    },
     newsList: {
       type: Array
     },
     showImg: {
       type: Boolean,
       default: false
+    },
+    count: {
+      type: Number,
+      default: 6
     }
   },
   data() {
@@ -49,6 +56,13 @@ export default {
     }
   },
   computed: {
+    textName() {
+      if(this.$util.isNotEmpty(this.newTypes)) {
+        return this.newTypes.name
+      } else {
+        return this.name
+      }
+    },
     imgSrc() {
       let img = ''
       if (this.newsList && this.newsList.length > 0) {
@@ -81,7 +95,7 @@ export default {
   .news-box {
     position: relative;
     .cover {
-      width: 380 * @base;
+      width: 350 * @base;
       height: 250 * @base;
       margin: 8 * @base 0;
       overflow: hidden;

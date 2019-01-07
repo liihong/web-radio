@@ -43,10 +43,30 @@
         </div>
       </div>
       <div class="viewpoint">
-        <Card name="主持节目"></Card>
+        <Card name="主持节目">
+          <el-row  :gutter="20">
+          <el-col  :span="6" v-for="(item,i) in programmes" :key="i">
+            <div class="programes">
+              <img v-if="$util.isNotEmpty(item.image)" :src="`${$api.IMG_URL}${item.image}`">
+              <img v-else src="../../assets/imgs/unknown.svg">
+              <h4>{{item.name}}</h4>
+            </div>
+          </el-col>
+          </el-row>
+        </Card>
       </div>
       <div class="relation">
-        <Card name="其他主持人"></Card>
+        <Card name="其他主持人">
+          <el-row  :gutter="15">
+           <el-col :span="6" v-for="(item,i) in peopleList" :key="i" v-show="i<4">
+            <div class="people">
+              <img v-if="$util.isNotEmpty(item.pImage)" :src="`${$api.IMG_URL}${item.pImage}`">
+              <img v-else src="../../assets/imgs/people.svg">
+              <h4>{{item.name}}</h4>
+            </div>
+          </el-col>
+          </el-row>
+        </Card>
       </div>
     </div>
   </div>
@@ -60,7 +80,7 @@ export default {
     return {
       navigationId: '1',
       peopleList: [],
-      itemList: [],
+      programmes: [],
       peopleInfo: {}
     }
   },
@@ -70,6 +90,18 @@ export default {
     }
   },
   methods: {
+    getPeopleList() {
+      this.$ajax
+        .get(this.$api.getPeopleList)
+        .then(res => {
+          if (res.data && res.data.content) {
+            this.peopleList = res.data.content.presenters
+            this.peopleList = this.peopleList.filter(item=>{
+              return item.id != this.peopleId
+            })
+          }
+        })
+    },
     getDetail() {
       this.categories = []
       this.$ajax
@@ -77,7 +109,8 @@ export default {
           id: this.peopleId
         })
         .then(res => {
-          this.peopleInfo = res.data.content
+          this.peopleInfo = res.data.content.presenter
+          this.programmes = res.data.content.programmes
           this.$store.dispatch('setPeopleName',this.peopleInfo.name)
         })
     },
@@ -90,10 +123,12 @@ export default {
   },
   mounted() {
     this.getDetail()
+    this.getPeopleList()
   },
   watch: {
     $route() {
       this.getDetail()
+      this.getPeopleList()
     }
   }
 }
@@ -147,6 +182,28 @@ export default {
               flex: 0.5;
             }
           }
+        }
+      }
+    }
+    .viewpoint{
+      .programes{
+        width:200*@base;
+        text-align: center;
+        margin:20*@base 5*@base;
+        img{
+          width: 100%;
+        }
+      }
+    }
+    .relation{
+      .people{
+        width:200*@base;
+        height: 200*@base;
+        overflow: hidden;
+        text-align: center;
+        margin:20*@base 5*@base;
+        img{
+          width: 100%;
         }
       }
     }

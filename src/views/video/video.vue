@@ -1,7 +1,7 @@
 <template>
     <div class="peopleList">
-        <el-row class="list">
-            <el-col :span="6" v-for="(item,index) in videos" :key="index" :offset="index > 0 ? 2 : 0">
+        <el-row class="list"  :gutter="20">
+            <el-col :span="8" v-for="(item,index) in videos" :key="index">
                 <div>
                      <div class="cover">
                      <img v-if="$util.isNotEmpty(item.pImage)" :src="`${$api.IMG_URL}${item.pImage}`">

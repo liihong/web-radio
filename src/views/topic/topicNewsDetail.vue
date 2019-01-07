@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     getNewsDetail() {
-      this.$ajax.get(this.$api.getNewsDetail, {
+      this.$ajax.get(this.$api.getNewsSpecial, {
         id: this.newsId
       }).then(res=>{
         this.newsDetail = res.data.content

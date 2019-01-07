@@ -1,19 +1,19 @@
 <template>
     <div class="peopleList">
-        <el-row class="list">
-            <el-col :span="6" v-for="(item,index) in peopleList" :key="index">
-                <div>
+        <el-row class="list"  :gutter="20">
+            <el-col :span="8" v-for="(item,index) in specialsList" :key="index">
+                <div @click="openDetail(item.id)" class="pointer">
                      <div class="cover">
-                     <img v-if="$util.isNotEmpty(item.pImage)" :src="`${$api.IMG_URL}${item.pImage}`">
+                     <img v-if="$util.isNotEmpty(item.cfImage)" :src="`${$api.IMG_URL}${item.cfImage}`">
                      <img v-else src="../../assets/imgs/unknown.svg">
                      </div>
                     <div class="name">
-                      <span>{{item.title}}</span>
+                      <span>{{item.name}}</span>
                       <h3 class="date">{{item.sendDate}}</h3>
                     </div>
                 </div>
             </el-col>
-            <div class="noData" v-show="peopleList.length < 0">暂无数据</div>
+            <div class="noData" v-show="specialsList.length < 0">暂无数据</div>
           
         </el-row>
     </div>
@@ -25,7 +25,7 @@ export default {
   components: {},
   data() {
     return {
-      peopleList: [],
+      specialsList: [],
     }
   },
   computed: {
@@ -36,7 +36,7 @@ export default {
         .get(this.$api.getTopic)
         .then(res => {
           if (res.data && res.data.content) {
-            this.peopleList = res.data.content.specials
+            this.specialsList = res.data.content.zhuantis
           }
         })
     },
@@ -44,7 +44,7 @@ export default {
       this.$router.go(-1)
     },
     openDetail(id) {
-      this.$router.push({ path: 'newsDetail', query: { id: id } })
+      this.$router.push({ path: 'seminarDetail', query: { id: id } })
     }
   },
   mounted() {
@@ -56,9 +56,7 @@ export default {
 .peopleList {
   .list{
     .cover {
-      // width: 380 * @base;
-      // height: 250 * @base;
-      margin: 8 * @base 0;
+      margin: 8 * @base 10*@base;
       overflow: hidden;
       img {
         height: 100%;

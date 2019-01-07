@@ -9,7 +9,7 @@ export default new Vuex.Store({
   },
   mutations: {
     peopeleName(state, data) {
-      state.peopeName = data
+      state.peopeleName = data
     }
   },
   actions: {

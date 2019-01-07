@@ -1,20 +1,20 @@
 <template>
   <div class="onLive">
     <div class="line">
-        <img @click="changeChannels(0)" src="../../../assets/imgs/926.jpg">
-        <img @click="changeChannels(1)" src="../../../assets/imgs/102.jpg">
-        <img @click="changeChannels(2)" src="../../../assets/imgs/1287.jpg">
-        <img @click="changeChannels(3)" src="../../../assets/imgs/927.jpg">
+        <img class="pointer" :class="{'activeImgage': activeLive == 3}" @click="changeChannels(3)" src="../../../assets/imgs/926.jpg">
+        <img class="pointer" :class="{'activeImgage': activeLive == 4}" @click="changeChannels(4)" src="../../../assets/imgs/102.jpg">
+        <img class="pointer" :class="{'activeImgage': activeLive == 5}" @click="changeChannels(5)" src="../../../assets/imgs/1287.jpg">
+        <img class="pointer" :class="{'activeImgage': activeLive == 2}" @click="changeChannels(2)" src="../../../assets/imgs/927.jpg">
     </div>
     <div class="jiemu">
       <ul>
-        <li v-for="(item,index) in audioData.jiemus" :key="index">
+        <li v-for="(item,index) in channels" :key="index">
           {{item.startTime}}-{{item.endTime}}
           {{item.name}}</li>
       </ul>
     </div>
     
-    <audio class="audio" id="audio" autoplay="autoplay" width="100" controls="controls" height="100" :src="channels[activeLive].lmtAddress"></audio>
+    <audio class="audio" id="audio" autoplay="autoplay" width="100" controls="controls" height="100" :src="lmtAddress"></audio>
   </div>
 </template>
 
@@ -25,18 +25,33 @@ export default {
     return {
       audioData: {},
       channels: [],
-      activeLive: 2
+      activeLive: 3,
+      lmtAddress: ''
     }
   },
   mounted() {
       this.getRadio()
+      
   },
   methods:{
     getRadio() {
       this.$ajax.get(this.$api.getChannelsAndFistList).then(res => {
         if (res.data.status === 200) {
           this.audioData = res.data.content
-          this.channels = this.audioData.channels
+          this.channels = this.audioData.jiemus
+          let pindao = res.data.content.channels
+          this.lmtAddress = pindao[1]['lmtAddress']
+        } else {
+          console.log('获取频率节目列表失败!')
+        }
+      })
+    },
+    getJieMu() {
+      this.$ajax.get(this.$api.getJieMuList,{
+        channelId: this.activeLive
+      }).then(res => {
+        if (res.data.status === 200) {
+          this.channels = res.data.content.jiemus
         } else {
           console.log('获取频率节目列表失败!')
         }
@@ -44,6 +59,7 @@ export default {
     },
     changeChannels(id) {
       this.activeLive = id
+      this.getJieMu()
     }
   }
 }
@@ -55,6 +71,9 @@ export default {
         img{
             width:95*@base;
             height: 95*@base;
+        }
+        .activeImgage{
+          border-bottom: 2*@base solid rgb(116, 17, 17);
         }
     }
     .jiemu{

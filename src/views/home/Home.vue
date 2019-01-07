@@ -1,11 +1,11 @@
 <template>
   <div class="home">
     <!--广告位1-->
-    <Advertising :src="Advertising1" />
+    <Advertising v-for="(item,i) in Advertising1" :key="i" :item="item" />
     <div class="row1">
       <h1>
         <router-link :to="{ path: 'newsDetail', query: { id: topNews.id }}" target="_blank">
-          {{topNews.title.length> 30 ? topNews.title.substr(0,30) : topNews.title}}
+          {{topNews.title}}
         </router-link>
       </h1>
       <div class="subHeadline">
@@ -18,16 +18,16 @@
       <slider class="slider" :picList="slides" v-show="slides.length > 0"></slider>
       <div class="newsTab">
         <div class="newsTitle">
-          <h1>许昌新闻</h1>
-          <NewsCard :newsList="newsList['19']" class="blockxc" @moreClick="moreClick('19')"></NewsCard>
+          <h1 class="pointer" @click="moreClick(newTypes[0])">{{topTitleName}}</h1>
+          <NewsCard :newsList="newsList[19]" class="blockxc" @moreClick="moreClick(newTypes[0])"></NewsCard>
         </div>
       </div>
     </div>
     <div class="line2">
       <div class="block1">
-        <NewsCard name="要闻推荐" :newsList="newsList['20']" @moreClick="moreClick('20')"></NewsCard>
-        <Advertising :src="Advertising2" />
-        <NewsCard name="电台活动" :newsList="newsList['21']" @moreClick="moreClick('21')"></NewsCard>
+        <NewsCard :newTypes="newTypes[1]" :newsList="newsList[20]" @moreClick="moreClick(newTypes[1])" :count="13"></NewsCard>
+       <Advertising v-for="(item,i) in Advertising2" :key="i" :item="item" />
+        <NewsCard :newTypes="newTypes[2]" :newsList="newsList[21]" @moreClick="moreClick(newTypes[2])" :count="3"></NewsCard>
       </div>
       <div class="block2">
         <Card name="在线收听" more="">
@@ -39,9 +39,9 @@
       </div>
     </div>
     <div class="line2">
-      <NewsCard name="汽车" showImg :newsList="newsList['22']" class="block1" @moreClick="moreClick('22')"></NewsCard>
-      <NewsCard name="健康" showImg :newsList="newsList['23']" class="block1" @moreClick="moreClick('23')"></NewsCard>
-      <NewsCard name="旅游" showImg :newsList="newsList['24']" class="block1" @moreClick="moreClick('24')"></NewsCard>
+      <NewsCard :newTypes="newTypes[3]" showImg :newsList="newsList[22]" class="block1" @moreClick="moreClick(newTypes[3])"></NewsCard>
+      <NewsCard :newTypes="newTypes[4]" showImg :newsList="newsList[23]" class="block1" @moreClick="moreClick(newTypes[4])"></NewsCard>
+      <NewsCard :newTypes="newTypes[5]" showImg :newsList="newsList[24]" class="block1" @moreClick="moreClick(newTypes[5])"></NewsCard>
     </div>
     <div class="line2">
       <Card name="主持人">
@@ -68,42 +68,44 @@ export default {
   },
   data() {
     return {
-      Advertising1: require('@/assets/imgs/20180719155833_1563.png'),
-      Advertising2: require('@/assets/imgs/AD0IlKYEEAIYACCKkvK-BSjGkev7AzDoBTh4.jpg'),
-      topNews: {
-        id: 't20181101_524401148',
-        title: '近平主持政治局会议 分析研究当前经济形势和经济工作'
-      },
-      topNewsTwo: [
-        { id: 't20181031_524400973', title: '加大改革开放力度，抓住主要矛盾' },
-        { id: 't20181031_524400973', title: '确保经济平稳运行' },
-        {
-          id: 't20181101_524401319',
-          title: '三个月两度研判经济形势，政治局会议给出哪些判断？'
-        }
-      ],
+      Advertising1: [],
+      Advertising2: [],
+      topNews: {},
+      topNewsTwo: [],
       invTime: 2000,
       slides: [],
       peopleList: [],
-      newsList: {}
+      newsList: {},
+      newTypes: []
     }
   },
-  mounted() {
+  computed: {
+    topTitleName() {
+      if(this.newTypes && this.newTypes.length > 0) {
+        return this.newTypes[0]['name']
+      } else{
+        return '许昌新闻'
+      }
+    }
+  },
+  created() {
     this.sliderlist()
     this.newslist()
     this.getPeopleList()
     this.getTopNews()
   },
   methods: {
-    moreClick(id) {
-      this.$router.push({path: '/newsList', query: { id }})
+    moreClick(item) {
+      this.$router.push({path: '/newsList', query: { id: item.id }})
     },
     sliderlist() {
       this.$ajax
         .get(this.$api.getHome)
         .then(res => {
           if (res.data.status === 200) {
-            this.slides = res.data.content.shufflingImages
+            let data =  res.data.content
+            this.slides = data.shufflingImages
+            this.Advertising1 = data.topImages
           } else {
             console.log('轮播图列表数据请求失败!')
           }
@@ -116,6 +118,7 @@ export default {
       this.$ajax.get(this.$api.getNews).then(res => {
         if (res.data.status === 200) {
           this.newsList = res.data.content
+          this.newTypes = res.data.content['newTypes']
         } else {
           console.log('新闻列表数据请求失败!')
         }
@@ -133,7 +136,10 @@ export default {
     getTopNews() {
       this.$ajax.get(this.$api.getTopOne).then(res => {
         if (res.data.status === 200) {
-          this.topNews = res.data.content.topOne
+          this.topNews = res.data.content.topOne[0]
+          if(this.topNews.title.length> 32)
+          {this.topNews.title = this.topNews.title.substr(0,31)+ '...'}
+          this.topNewsTwo = res.data.content.topOne.slice(1,3)
         } else {
           console.log('头条数据获取失败!')
         }

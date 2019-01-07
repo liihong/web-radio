@@ -127,12 +127,12 @@ export default {
     .title {
       opacity: 0.77;
       width: 100%;
+      text-align: center;
       height: 72 * @base;
-      padding-left: 15 * @base;
       background: #450105;
       position: absolute;
       top: 330 * @base;
-      font-size: 22 * @base;
+      font-size: 20 * @base;
       color: #ffffff;
     }
   }
