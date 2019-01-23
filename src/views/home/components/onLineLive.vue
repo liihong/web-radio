@@ -8,13 +8,13 @@
     </div>
     <div class="jiemu">
       <ul>
-        <li v-for="(item,index) in channels" :key="index">
+        <li class="pointer" v-for="(item,index) in channels" :key="index">
           {{item.startTime}}-{{item.endTime}}
           {{item.name}}</li>
       </ul>
     </div>
     
-    <audio class="audio" id="audio" autoplay="autoplay" width="100" controls="controls" height="100" :src="lmtAddress"></audio>
+    <audio class="audio" ref="audio" id="audio" autoplay="autoplay" width="100" controls="controls" height="100" :src="lmtAddress"></audio>
   </div>
 </template>
 
@@ -40,7 +40,8 @@ export default {
           this.audioData = res.data.content
           this.channels = this.audioData.jiemus
           let pindao = res.data.content.channels
-          this.lmtAddress = pindao[1]['lmtAddress']
+          this.lmtAddress = pindao[0]['lmtAddress']
+          console.log(this.lmtAddress)
         } else {
           console.log('获取频率节目列表失败!')
         }
@@ -59,6 +60,12 @@ export default {
     },
     changeChannels(id) {
       this.activeLive = id
+      let pindao = this.audioData.channels.filter(item=>{
+        return item.id == id
+      })
+      this.lmtAddress = pindao[0]['lmtAddress']
+      this.$refs.audio.play()
+      console.log(this.lmtAddress)
       this.getJieMu()
     }
   }

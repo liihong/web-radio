@@ -9,8 +9,9 @@
           <span>来源：{{newsDetail.scoure}}</span>
           <!-- <span>作者：{{newsDetail.author}}</span> -->
           <span>发布时间：{{newsDetail.sendDate}}</span>
+          <span>字号：<label class="pointer" @click="fontSize++">A+</label> <label  @click="fontSize--" class="pointer">A-</label></span>
         </div>
-        <p class="newsContent" v-html="newsDetail.content"></p>
+        <p :style="{ fontSize: fontSize + 'px' }" class="newsContent" v-html="newsDetail.content"></p>
         <div class="share"></div>
     </Card>
   </div>
@@ -25,7 +26,8 @@ export default {
   },
   data () {
     return {
-      newsDetail: {}
+      newsDetail: {},
+      fontSize: 14
     }
   },
   computed:{

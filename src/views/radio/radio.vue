@@ -3,9 +3,11 @@
     <el-row class="list">
       <el-col :span="16">
         <el-row>
-          <el-col :span="8">
-            <img v-if="$util.isNotEmpty(channel.image)"  :src="`${$api.IMG_URL}${channel.image}`">
-            <img v-else src="../../assets/imgs/unknown.svg">
+          <el-col :span="10">
+            <div class="cover">
+              <img v-if="$util.isNotEmpty(channel.image)" :src="`${$api.IMG_URL}${channel.image}`">
+              <img v-else src="../../assets/imgs/unknown.svg">
+            </div>
           </el-col>
           <el-col :span="4">
             <h1>{{channel.name}}</h1>
@@ -19,17 +21,26 @@
           <el-col>
             <Card class="playList" name="播放列表" more="">
               <el-row class="playListTitle">
-                <el-col :span="8"><span :class="{'activeDay': activeDay == '昨天'}">昨天</span></el-col>
-                <el-col :span="8"><span :class="{'activeDay': activeDay == '今天'}">今天</span></el-col>
-                <el-col :span="8"><span :class="{'activeDay': activeDay == '明天'}">明天</span></el-col>
+                <el-col :span="8">
+                  <span :class="{'activeDay': activeDay == '昨天'}">昨天</span>
+                </el-col>
+                <el-col :span="8">
+                  <span :class="{'activeDay': activeDay == '今天'}">今天</span>
+                </el-col>
+                <el-col :span="8">
+                  <span :class="{'activeDay': activeDay == '明天'}">明天</span>
+                </el-col>
               </el-row>
               <el-row>
                 <el-col>
-                      <el-row class="jmRow" v-for="(item,i) in jiemus" :key="i">
-                        <el-col class="nameJm" :span="8"><i class="iconfont icon-bofang1"></i>{{item.name}}</el-col>
-                        <el-col :span="8"><span class="time">{{item.startTime}}-{{item.endTime}}</span></el-col>
-                        <el-col :span="8">主播： --</el-col>
-                      </el-row>
+                  <el-row class="jmRow" v-for="(item,i) in jiemus" :key="i">
+                    <el-col class="nameJm" :span="8">
+                      <i class="iconfont icon-bofang1"></i>{{item.name}}</el-col>
+                    <el-col :span="8">
+                      <span class="time">{{item.startTime}}-{{item.endTime}}</span>
+                    </el-col>
+                    <el-col :span="8">主播： --</el-col>
+                  </el-row>
                 </el-col>
               </el-row>
             </Card>
@@ -65,7 +76,7 @@ export default {
   },
   computed: {
     id() {
-      return this.$route.query.id
+      return this.$route.meta.id
     }
   },
   methods: {
@@ -88,7 +99,7 @@ export default {
             this.jiemus = res.data.content.jiemus
           }
         })
-        this.$ajax
+      this.$ajax
         .get(this.$api.getNoticeByChannelId, {
           channelId: this.id
         })
@@ -97,8 +108,8 @@ export default {
             this.notice = res.data.content.notices.content
           }
         })
-        
-        this.$ajax
+
+      this.$ajax
         .get(this.$api.getPeopleByChannelId, {
           channelId: this.id
         })
@@ -123,45 +134,45 @@ export default {
 <style lang="less" scoped>
 .peopleList {
   .list {
-    h2{
-      margin-top:20*@base;
+    h2 {
+      margin-top: 20 * @base;
     }
-    .playList{
-      .playListTitle{
+    .playList {
+      .playListTitle {
         text-align: center;
-        margin-top:10*@base;
-        height: 40*@base;
+        margin-top: 10 * @base;
+        height: 40 * @base;
         line-height: 0.4rem;
-        background: #F2F2F5;
-        span{
+        background: #f2f2f5;
+        span {
           display: block;
-          height: 37*@base;
-          margin: 0 100*@base;
+          height: 37 * @base;
+          margin: 0 100 * @base;
         }
-        .activeDay{
-          border-bottom: 3*@base solid red;
+        .activeDay {
+          border-bottom: 3 * @base solid red;
         }
       }
-      .jmRow{
-          text-align: center;
-          color: #9B9B9B;
-          // height: 50*@base;
-          line-height: 50*@base;
-          border-bottom: 1*@base solid #DBDEE4;
-          .nameJm{
-            text-align: left;
-            padding-left: 10*@base;
-            i{
-              color:rgb(189, 187, 187);
-              font-size: 20*@base;
-              padding-right: 8*@base;
-            }
+      .jmRow {
+        text-align: center;
+        color: #9b9b9b;
+        // height: 50*@base;
+        line-height: 50 * @base;
+        border-bottom: 1 * @base solid #dbdee4;
+        .nameJm {
+          text-align: left;
+          padding-left: 10 * @base;
+          i {
+            color: rgb(189, 187, 187);
+            font-size: 20 * @base;
+            padding-right: 8 * @base;
           }
+        }
       }
     }
     .cover {
-      width: 380 * @base;
-      height: 250 * @base;
+      width: 300 * @base;
+      height: 200 * @base;
       margin: 8 * @base 0;
       overflow: hidden;
       img {

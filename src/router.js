@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from './views/Index.vue'
-
+import NotFoundComponent from './views/Error.vue'
 Vue.use(Router)
 
 export default new Router({
-  // mode: 'history',
+  mode: 'history',
+  hashbang: false,
   routes: [
     {
       path: '/',
@@ -41,22 +42,22 @@ export default new Router({
         },{
           path: '/fm926',
           name: 'FM92.6',
-          query: {id: 3},
+          meta: {id: 3},
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
         },{
           path: '/am1287',
           name: 'AM1287',
-          query: {id: 5},
+          meta: {id: 5},
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
         },{
           path: '/fm102',
           name: 'FM102',
-          query: {id: 4},
+          meta: {id: 4},
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
         },{
           path: '/am927',
           name: 'AM927',
-          query: {id: 2},
+          meta: {id: 2},
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
         },{
           path: '/peopleList',
@@ -96,7 +97,8 @@ export default new Router({
           ]
         }
       ]
-    }
+    },
+    { path: '*', component: NotFoundComponent }
   ],
   scrollBehavior ()  {
     return { x: 0, y: 0 }

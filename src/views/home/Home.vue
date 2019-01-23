@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <!--广告位1-->
-    <Advertising v-for="(item,i) in Advertising1" :key="i" :item="item" />
+    <!-- <Advertising v-for="(item,i) in Advertising1" :key="i" :item="item" /> -->
+    <div v-html="Advertising1"></div>
     <div class="row1">
       <h1>
         <router-link :to="{ path: 'newsDetail', query: { id: topNews.id }}" target="_blank">
@@ -25,8 +26,8 @@
     </div>
     <div class="line2">
       <div class="block1">
-        <NewsCard :newTypes="newTypes[1]" :newsList="newsList[20]" @moreClick="moreClick(newTypes[1])" :count="13"></NewsCard>
-       <Advertising v-for="(item,i) in Advertising2" :key="i" :item="item" />
+        <NewsCard :newTypes="newTypes[1]" :newsList="newsList[20]" @moreClick="moreClick(newTypes[1])" :count="10"></NewsCard>
+       <Advertising  v-for="(item,i) in Advertising2" :key="i" :item="item" :height="150"/>
         <NewsCard :newTypes="newTypes[2]" :newsList="newsList[21]" @moreClick="moreClick(newTypes[2])" :count="3"></NewsCard>
       </div>
       <div class="block2">
@@ -44,7 +45,7 @@
       <NewsCard :newTypes="newTypes[5]" showImg :newsList="newsList[24]" class="block1" @moreClick="moreClick(newTypes[5])"></NewsCard>
     </div>
     <div class="line2">
-      <Card name="主持人">
+      <Card name="主持人"  @moreClick="openPeople()">
         <picSwiper :picData="peopleList"></picSwiper>
       </Card>
     </div>
@@ -68,7 +69,7 @@ export default {
   },
   data() {
     return {
-      Advertising1: [],
+      Advertising1: '',
       Advertising2: [],
       topNews: {},
       topNewsTwo: [],
@@ -98,6 +99,9 @@ export default {
     moreClick(item) {
       this.$router.push({path: '/newsList', query: { id: item.id }})
     },
+    openPeople() {
+      this.$router.push({path: '/peopleList'})
+    },
     sliderlist() {
       this.$ajax
         .get(this.$api.getHome)
@@ -105,7 +109,23 @@ export default {
           if (res.data.status === 200) {
             let data =  res.data.content
             this.slides = data.shufflingImages
-            this.Advertising1 = data.topImages
+            // this.Advertising1 = data.topImages
+            // this.Advertising2 = data.centerImages
+          } else {
+            console.log('轮播图列表数据请求失败!')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        this.$ajax
+        .get(this.$api.getHTML,{
+          type:3
+        })
+        .then(res => {
+          if (res.data.status === 200) {
+            let data =  res.data.content
+            this.Advertising1 = data.html 
           } else {
             console.log('轮播图列表数据请求失败!')
           }

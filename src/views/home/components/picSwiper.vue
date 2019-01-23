@@ -1,6 +1,6 @@
 <template>
   <div class="newsSwiper">
-    <swiper :options="newsOption" ref="newsSwiper">
+    <swiper  class="swiper-container"  v-if="picData.length>1" :options="newsOption" ref="newsSwiper">
       <swiperSlide v-for="(item,iIndex) in picData" :key="iIndex">
         <div class="swiper-content"  @click="openDetail(item.id)">
           <div class="cover">
@@ -34,7 +34,11 @@ export default {
         observer: true, //修改swiper自己或子元素时，自动初始化swiper
         observeParents: true, //修改swiper的父元素时，自动初始化swiper
         history: 'love',
-        autoplay: true,
+        autoplay: {
+          disableOnInteraction: false,
+          delay: 3000
+        },
+        loop: true,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'

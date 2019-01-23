@@ -1,15 +1,15 @@
 <template>
   <div class="div_Scroll" ref="div_Scroll">
-    <swiper :options="swiperOption" ref="mySwiper">
+    <swiper class="swiper-container1" v-if="picList.length>1" :options="swiperOption" ref="mySwiper">
       <swiperSlide v-for="(item,iIndex) in picList" :key="iIndex">
-        <a  target="_blank" class="pointer" :href="item.weblinkAddress">
-        <div class="swiper-content">
-          <div class="cover">
-             <img v-if="$util.isNotEmpty(item.cfImage)" :src="`${$api.IMG_URL}${item.cfImage}`">
-                  <img v-else src="../assets/imgs/unknown.svg">
+        <a target="_blank" class="pointer" :href="item.weblinkAddress">
+          <div class="swiper-content">
+            <div class="cover">
+              <img v-if="$util.isNotEmpty(item.cfImage)" :src="`${$api.IMG_URL}${item.cfImage}`">
+              <img v-else src="../assets/imgs/unknown.svg">
             </div>
-          <div class="title">{{item.title}}</div>
-        </div>
+            <div class="title">{{item.title}}</div>
+          </div>
         </a>
       </swiperSlide>
 
@@ -40,6 +40,7 @@ export default {
         observeParents: true, //修改swiper的父元素时，自动初始化swiper
         history: 'love',
         autoplay: true,
+        loop: true,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
@@ -54,8 +55,10 @@ export default {
     swiper,
     swiperSlide
   },
-  mounted() {},
-  methods: {}
+  mounted() {
+  },
+  methods: {
+  }
 }
 </script>
 <style lang="less">

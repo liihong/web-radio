@@ -56,5 +56,7 @@ export default {
 
   getVideos: '/videos/getVideos',
 
-  getVideoDetial: '/api/videos/getVideo'
+  getVideoDetial: '/videos/getVideo',
+
+  getHTML: '/thePeopleServices/getHtml'
 }
