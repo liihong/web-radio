@@ -10,10 +10,9 @@
         </router-link>
       </h1>
       <div class="subHeadline">
-        <router-link target="_blank" :to="{ path: 'newsDetail', query: { id: topNewsTwo.id }}" v-for="(item, $index) in topNewsTwo" :key="$index">{{item.title}} &nbsp;&nbsp;&nbsp;</router-link>
+        <router-link target="_blank" :to="{ path: 'newsDetail', query: { id: item.id }}" v-for="(item, $index) in topNewsTwo" :key="$index">{{item.title}} &nbsp;&nbsp;&nbsp;</router-link>
       </div>
       <span class="toutiao"></span>
-
     </div>
     <div class="line1">
       <slider class="slider" :picList="slides" v-show="slides.length > 0"></slider>
@@ -172,20 +171,20 @@ export default {
 .home {
   position: relative;
   .row1 {
-    margin-top: 10px;
+    margin-top: 10*@base;
     position: relative;
     background-color: #fafafa;
     border: 1px solid #dcdcdc;
-    height: 99px;
+    height: 99*@base;
     h1 {
       text-align: center;
       height: 36px;
-      font-size: 38px;
+      font-size: 45*@base;
       font-weight: 900;
       padding: 14px 0;
     }
     .subHeadline {
-      height: 14px;
+      height: 14*@base;
       text-align: center;
       padding: 7px 0;
     }
@@ -193,13 +192,13 @@ export default {
       position: absolute;
       left: -1px;
       top: -4px;
-      background: url(../../assets/imgs/index.png) no-repeat -68px 0;
-      height: 104px;
-      width: 102px;
+      background: url(../../assets/imgs/index.png) no-repeat -68*@base 0;
+      height: 104*@base;
+      width: 102*@base;
     }
   }
   .line1 {
-    margin-top: 10px;
+    margin-top: 10*@base;
     display: flex;
     .slider {
       flex: 0.5;

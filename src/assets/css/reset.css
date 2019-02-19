@@ -52,6 +52,7 @@ html{
    margin: 0;
    padding: 0;
    height: 100%;
+   background: #FFFFFF !important;
    position:relative;
    box-sizing:border-box;
    /*阻止默认事件*/

@@ -50,7 +50,7 @@ export default {
   }
 }
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .newsDetail{
   padding:36*@base 30*@base;
   .news-title{
@@ -82,9 +82,9 @@ export default {
     margin-top:13*@base;
     padding-top:20*@base;
     border-top:2px solid #D8DCE1;
-    img{
-      width: 100%;
-    }
+    // img{
+    //   width: 100%;
+    // }
   }
     
 }
