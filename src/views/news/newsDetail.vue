@@ -27,7 +27,7 @@ export default {
   data () {
     return {
       newsDetail: {},
-      fontSize: 14
+      fontSize: 18
     }
   },
   computed:{
@@ -79,7 +79,7 @@ export default {
   }
   .newsContent{
     overflow: hidden;
-    color: rgba(47,59,78,0.87);
+    color: rgba(30, 33, 37, 0.979);
     line-height: 38*@base;
     margin-top:13*@base;
     padding-top:20*@base;
