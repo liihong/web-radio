@@ -97,11 +97,10 @@ export default {
 </script>
 <style lang="less" scoped>
 .newsList {
-  display: flex;
   .left {
-    flex: 0.3;
     ul {
       li {
+        float: left;
         color: @themeColor;
         font-weight: 900;
         background-color: #f5f5f5;
@@ -117,20 +116,28 @@ export default {
     }
   }
   .right {
-    flex: 0.7;
     margin-left: 10 * @base;
     .list {
       .info {
-        line-height: 36 * @base;
+        line-height: 66 * @base;
+        display: flex;
+        position: relative;
         .circle {
+          position: absolute;
+          top: 50%;
           display: inline-block;
           border-radius: 50%;
-          width: 8 * @base;
-          height: 8 * @base;
+          width: 15 * @base;
+          height: 15 * @base;
           background: @themeColor;
         }
         .title {
-          margin-left: 15 * @base;
+          margin-left: 30 * @base;
+          flex: 1;
+            word-break: keep-all;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
         .date {
           float: right;

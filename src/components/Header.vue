@@ -61,7 +61,7 @@
       </ul>
     </div>  -->
     <swiper class="swiper-container" v-if="menuData.length>1" :options="newsOption" ref="newsSwiper">
-      <swiperSlide class="menu" v-for="(item,iIndex) in menuData" :key="iIndex">
+      <swiperSlide class="menu" v-for="(item,iIndex) in menuData" :key="iIndex"  v-if="!item.hidden">
         <div class="swiper-content"  :class="(activeMenu == item.path ? 'active' : '')" @click.stop="changeMenu(item, '1')">
           <span class="oneLi">{{item.name}}</span>
         </div>
@@ -276,7 +276,6 @@ export default {
   }
   .menu {
     background: @themeColor;
-    font-size: 18 * @base;
     color: #ffffff;
     height: 80*@base;
     line-height: 0.8rem;

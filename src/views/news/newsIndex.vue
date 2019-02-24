@@ -1,10 +1,10 @@
 <template>
     <div class="newsList">
-      <el-row>
+      <el-row v-if="noticeList.length>0">
         <NewsCard name="通知公告" :newsList="noticeList"></NewsCard>
       </el-row>
         <el-row>
-            <el-col :span="12" @click="ChangeType(item.id)" v-for="(item,i) in typeList" :key="i">
+            <el-col @click="ChangeType(item.id)" v-for="(item,i) in typeList" :key="i">
                <NewsCard :name="item.name" :newsList="newsList[item.id]" @moreClick="moreClick(item.id)"></NewsCard>
             </el-col>
         </el-row>
