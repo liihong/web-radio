@@ -11,6 +11,27 @@
     <meta name="referrer" content="never"/>
     
   </head>
+  <script type="text/javascript">
+
+    var ua = navigator.userAgent;
+    
+    var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+    
+    isIphone =!ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+    
+    isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+    
+    isMobile = isIphone || isAndroid;
+    
+    //判断
+    
+    if(isMobile){
+    window.location.href='http://www.xcdt.cn/phone'
+    }else{
+    
+    }
+    
+    </script>
   <body>
     <noscript>
       <strong>非常抱歉，您使用的浏览器不支持当前网站，请更换浏览器</strong>
