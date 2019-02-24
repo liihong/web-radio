@@ -10,8 +10,8 @@ function addStyleResource(rule) {
     });
 }
 module.exports = {
-  // baseUrl: '/dist',
-  // outputDir: 'dist',
+  baseUrl: '/phone/',
+  // outputDir: 'phone',
 
   chainWebpack: (config) => {
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal'];

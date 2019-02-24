@@ -5,8 +5,8 @@ import NotFoundComponent from './views/Error.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
-  hashbang: false,
+  // mode: 'history',
+  // hashbang: false,
   routes: [
     {
       path: '/',
