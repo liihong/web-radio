@@ -9,7 +9,7 @@
           <ul>
             <li class="clearFix" v-for="(news, index) in newsList" :key="index" v-if="index < count">
               <router-link class="link" :to="{ path: 'newsDetail', query: { id: news.id }}">
-                <div class="newstxt-title">{{news.title}}</div>
+                <div :class="{'newstxt-title2': showImg}" class="newstxt-title">{{news.title}}</div>
                 <div v-show="!showImg" class="time">{{news.sendDate}}</div>
               </router-link>
             </li>
@@ -98,6 +98,8 @@ export default {
       width: 350 * @base;
       height: 250 * @base;
       margin: 8 * @base 0;
+      margin-right: 0.3rem;
+      float: left;
       overflow: hidden;
       img {
         height: 100%;
@@ -110,21 +112,21 @@ export default {
     ul {
       .clearFix {
         border-bottom: 1 * @base dashed #e0e0e0;
-        line-height: 49 * @base;
+        line-height: 80 * @base;
         .link {
           display: flex;
           .newstxt-title {
-            flex: 1;
-            width: 300 * @base;
+            flex: 0.8;
             word-break: keep-all;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
           }
+          .newstxt-title2{
+            flex: 1;
+          }
           .time {
-            flex: 0.2;
-            text-align: right;
-            margin-right: 15 * @base;
+            flex: 0.25;
           }
         }
       }

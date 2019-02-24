@@ -16,9 +16,9 @@
 <template>
   <div class="header" @click.stop="onHeadClick">
     <top-bar/>
-    <div class="search">
-      <img src="../assets/imgs/logo.png" height="100">
-      <div class="searchGroup">
+    <!-- <div class="search">
+       <img src="../assets/imgs/logo.png" height="100"> 
+       <div class="searchGroup">
         <div class="input">
           <input v-model="searchValue"  @keyup.enter="enter" @keydown.down='change()' @keydown.up='up()' />
           <div class="icon">
@@ -49,8 +49,8 @@
           </ul>
         </div>
       </div>
-    </div>
-    <div class="menu">
+    </div>-->
+    <!-- <div class="menu">
       <ul class="oneLevel">
         <li v-if="!item.hidden" class="oneLi" @click.stop="changeMenu(item, '1')" v-for="(item,index) in menuData" :key="index" :class="(activeMenu.indexOf(item.path) > -1 ? 'active' : '')">
           <span>{{item.name}}</span>
@@ -59,16 +59,27 @@
           </ul>
         </li>
       </ul>
-    </div>
+    </div>  -->
+    <swiper class="swiper-container" v-if="menuData.length>1" :options="newsOption" ref="newsSwiper">
+      <swiperSlide class="menu" v-for="(item,iIndex) in menuData" :key="iIndex">
+        <div class="swiper-content"  :class="(activeMenu == item.path ? 'active' : '')" @click.stop="changeMenu(item, '1')">
+          <span class="oneLi">{{item.name}}</span>
+        </div>
+      </swiperSlide>
+    </swiper>
   </div>
 </template>
 
 <script>
 import TopBar from '@/components/TopBar.vue'
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   name: 'qz-header',
   components: {
     TopBar,
+    swiper,
+    swiperSlide
   },
   props: {
     logo: {
@@ -85,6 +96,16 @@ export default {
   },
   data() {
     return {
+      newsOption: {
+        // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
+        notNextTick: true,
+        slidesPerView: '5', // 设置slider容器能够同时显示的slides数量(carousel模式)。
+        scrollbar: '.swiper-scrollbar',
+        initialSlide: 0, //初始索引
+        observer: true, //修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true, //修改swiper的父元素时，自动初始化swiper
+        history: 'love',
+      },
       searchValue: '',
       selectedObj: {},
       suggestions: [],
@@ -180,8 +201,8 @@ export default {
     selected: function(obj) {
       this.selectedObj = obj
       this.$router.push({ path: '/peopleDetail', query: { id: obj.id } })
-       this.suggestions = []
-    },
+      this.suggestions = []
+    }
   },
   watch: {
     searchValue() {
@@ -233,14 +254,14 @@ export default {
         }
         .icon {
           transform: scale(1.8);
-          color: #7D0000;
+          color: #7d0000;
           display: inline-block;
         }
       }
       .searchBtn {
         width: 100 * @base;
         text-align: center;
-        background: #7D0000;
+        background: #7d0000;
         border-radius: 2px;
         .icon {
           transform: scale(1.5);
@@ -255,39 +276,13 @@ export default {
   }
   .menu {
     background: @themeColor;
-    height: 52 * @base;
-    line-height: 52 * @base;
     font-size: 18 * @base;
     color: #ffffff;
-    .oneLevel {
-      max-width: @maxWidth;
-      margin: 0 auto;
-      display: flex;
-      //   justify-content: center;
-      height: auto;
-      .oneLi {
-        float: left;
-        cursor: pointer;
-        span {
-          padding: 0 35 * @base;
-        }
-      }
-      .active {
-        background: #7D0000;
-      }
-    }
-    .towLevel {
-      color: rgba(0, 0, 0, 0.8);
-      background: #ffffff;
-      font-size: 15 * @base;
-      position: absolute;
-      z-index: 9;
-      padding: 0 8 * @base;
-      transition: height 3s;
-      box-shadow: 0 1px 4px 0 #9dc0db;
-      li:hover {
-        color: #7D0000;
-      }
+    height: 80*@base;
+    line-height: 0.8rem;
+    text-align: center;
+    .active {
+      background: #7d0000;
     }
   }
 }

@@ -15,7 +15,7 @@
 -->
 <template>
   <div class="header">
-    <h1>登录|请注册</h1>
+    <h1>XCR许昌广播网</h1>
   </div>
 </template>
 
@@ -109,16 +109,15 @@ export default {
 .header {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   padding-left: 26px;
   height: 40px;
   line-height: 40px;
   color: #ffffff;
   background-color: #2f3b4e;
   h1 {
-    margin-left: 8px;
     font-family: PingFangSC-Medium;
-    font-size: 16px;
+    font-size: 52*@base;
     color: #ffffff;
   }
 }

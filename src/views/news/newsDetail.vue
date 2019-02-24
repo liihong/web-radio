@@ -3,15 +3,15 @@
     <Card class="newsDetail">
       <div class="news-title">
         <h1>{{newsDetail.title}}</h1>
-        <div class="back pointer" @click="goBack"><span>返回</span></div>
       </div>
         <div class="infos">
-          <span>来源：{{newsDetail.scoure}}</span>
+          <span v-if="newsDetail.scoure != ''">来源：{{newsDetail.scoure}}</span>
           <!-- <span>作者：{{newsDetail.author}}</span> -->
           <span>发布时间：{{newsDetail.sendDate}}</span>
           <span>字号：<label class="pointer" @click="fontSize++">A+</label> <label  @click="fontSize--" class="pointer">A-</label></span>
+          <!-- <span  class="back pointer"  @click="goBack">返回</span> -->
         </div>
-        <p :style="{ fontSize: fontSize + 'px' }" class="newsContent" v-html="newsDetail.content"></p>
+        <p class="newsContent" v-html="newsDetail.content"></p>
         <div class="share"></div>
     </Card>
   </div>
@@ -27,7 +27,6 @@ export default {
   data () {
     return {
       newsDetail: {},
-      fontSize: 18
     }
   },
   computed:{
@@ -60,14 +59,9 @@ export default {
     h1{
       flex:1;
       font-weight: 900;
-      font-size: 26*@base;
+      font-size: 52*@base;
       text-align: center;
       color: #2F3B4E;
-    }
-    .back{
-      flex:0.05;
-      font-size: 13*@base;
-      color: #3BA1ED;
     }
   }
   
@@ -76,17 +70,18 @@ export default {
     span:nth-child(n+2){
       margin-left: 38*@base;
     }
+    .back{
+      float: right;
+      font-size: 14*@base;
+      color: #3BA1ED;
+    }
   }
   .newsContent{
     overflow: hidden;
     color: rgba(30, 33, 37, 0.979);
-    line-height: 38*@base;
     margin-top:13*@base;
     padding-top:20*@base;
     border-top:2px solid #D8DCE1;
-    // img{
-    //   width: auto;
-    // }
   }
     
 }

@@ -42,14 +42,14 @@ export default {
   min-height: 70 * @base;
   .title {
     display: flex;
-    line-height: 32*@base;
+    // line-height: 32*@base;
     border-bottom: 0.5*@base solid #cccccc;
     .name {
       flex: 0.7;
       span {
         display: inline-block;
         color: @themeColor;
-        font-size: @20FontSize;
+        // font-size: @20FontSize;
         font-weight: 900;
         border-bottom: 2*@base solid @themeColor;
       }

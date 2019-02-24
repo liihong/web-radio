@@ -1,8 +1,7 @@
 <template>
   <div class="home">
     <!--广告位1-->
-    <!-- <Advertising v-for="(item,i) in Advertising1" :key="i" :item="item" /> -->
-    <div v-html="Advertising1"></div>
+    <!-- <div v-html="Advertising1"></div> -->
     <div class="row1">
       <h1>
         <router-link :to="{ path: 'newsDetail', query: { id: topNews.id }}" target="_blank">
@@ -30,12 +29,12 @@
         <NewsCard :newTypes="newTypes[2]" :newsList="newsList[21]" @moreClick="moreClick(newTypes[2])" :count="3"></NewsCard>
       </div>
       <div class="block2">
-        <Card name="在线收听" more="">
+        <!-- <Card name="在线收听" more="">
           <onLineLive></onLineLive>
-        </Card>
-        <Card name="便民服务" more="">
+        </Card> -->
+        <!-- <Card name="便民服务" more="">
           <services></services>
-        </Card>
+        </Card> -->
       </div>
     </div>
     <div class="line2">
@@ -175,7 +174,6 @@ export default {
     position: relative;
     background-color: #fafafa;
     border: 1px solid #dcdcdc;
-    height: 99*@base;
     h1 {
       text-align: center;
       height: 36px;
@@ -192,19 +190,14 @@ export default {
       position: absolute;
       left: -1px;
       top: -4px;
-      background: url(../../assets/imgs/index.png) no-repeat -68*@base 0;
+      // background: url(../../assets/imgs/index.png) no-repeat -68*@base 0;
       height: 104*@base;
       width: 102*@base;
     }
   }
   .line1 {
     margin-top: 10*@base;
-    display: flex;
-    .slider {
-      flex: 0.5;
-    }
     .newsTab {
-      flex: 0.5;
       .newsTitle {
         h1 {
           width: 100%;
@@ -222,13 +215,10 @@ export default {
     }
   }
   .line2 {
-    display: flex;
     .block1 {
-      flex: 0.7;
       margin:10*@base;
     }
     .block2 {
-      flex: 0.3;
       margin:10*@base;
     }
   }

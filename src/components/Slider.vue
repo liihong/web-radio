@@ -123,7 +123,7 @@ export default {
     }
     .cover {
       // width: 580px;
-      height: 380 * @base;
+      height: 500 * @base;
       overflow: hidden;
       position: relative;
     }
@@ -132,10 +132,10 @@ export default {
       width: 100%;
       text-align: center;
       height: 72 * @base;
+      line-height: 72 * @base;
       background: #450105;
       position: absolute;
-      top: 330 * @base;
-      font-size: 20 * @base;
+      bottom: 0;
       color: #ffffff;
     }
   }

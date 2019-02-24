@@ -46,10 +46,10 @@ export default {
   }
   h1 {
     margin-left: 8px;
-    font-size: 16px;
     color: #ffffff;
   }
   .container{
+      font-size: 12*@base !important;
       .footer_nav{
           border-bottom: 1px dotted #cccccc;
       }
