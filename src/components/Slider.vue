@@ -1,6 +1,6 @@
 <template>
   <div class="div_Scroll" ref="div_Scroll">
-    <swiper class="swiper-container1" v-if="picList.length>1" :options="swiperOption" ref="mySwiper">
+    <swiper id="swiper_container" class="swiper-container1" v-if="picList.length>1" :options="swiperOption" ref="mySwiper">
       <swiperSlide v-for="(item,iIndex) in picList" :key="iIndex">
         <a target="_blank" class="pointer" :href="item.weblinkAddress">
           <div class="swiper-content">
@@ -8,7 +8,7 @@
               <img v-if="$util.isNotEmpty(item.cfImage)" :src="`${$api.IMG_URL}${item.cfImage}`">
               <img v-else src="../assets/imgs/unknown.svg">
             </div>
-            <div class="title">{{item.title}}</div>
+            <div class="title">{{item.title.length>30? item.title.substr(0,29)+'...' : item.title}}</div>
           </div>
         </a>
       </swiperSlide>
@@ -32,9 +32,10 @@ export default {
     return {
       swiperOption: {
         // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
-        notNextTick: true,
+        notNextTick: false,
         slidesPerView: '1', // 设置slider容器能够同时显示的slides数量(carousel模式)。
         scrollbar: '.swiper-scrollbar',
+        autoplayDisableOnInteraction: false,
         initialSlide: 0, //初始索引
         observer: true, //修改swiper自己或子元素时，自动初始化swiper
         observeParents: true, //修改swiper的父元素时，自动初始化swiper
@@ -55,10 +56,30 @@ export default {
     swiper,
     swiperSlide
   },
-  mounted() {
+  computed: {
+    swiper() {
+      if (this.$refs.mySwiper && this.$refs.mySwiper.swiper)
+        return this.$refs.mySwiper.swiper
+      else return ''
+    }
   },
-  methods: {
-  }
+  mounted() {
+    let vm = this
+    this.$nextTick(() => {
+      /*鼠标移入停止轮播，鼠标离开 继续轮播*/
+      console.log(this.swiper)
+
+      var comtainer = document.getElementById('swiper_container')
+      console.log(comtainer)
+      comtainer.onmouseenter = function() {
+        vm.swiper.autoplay.stop()
+      }
+      comtainer.onmouseleave = function() {
+        vm.swiper.autoplay.start()
+      }
+    })
+  },
+  methods: {}
 }
 </script>
 <style lang="less">

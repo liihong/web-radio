@@ -24,6 +24,11 @@ export default new Router({
           component: () => import(/* webpackChunkName: 'NewsDetail' */ './views/news/newsIndex')
         },
         {
+          path: '/search',
+          name: '搜索结果',
+          component: () => import(/* webpackChunkName: 'NewsDetail' */ './views/search/index')
+        },
+        {
           path: '/newsList',
           hidden: true,
           name: '新闻列表',

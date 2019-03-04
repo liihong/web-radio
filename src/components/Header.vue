@@ -20,7 +20,7 @@
       <img src="../assets/imgs/logo.png" height="100">
       <div class="searchGroup">
         <div class="input">
-          <input v-model="searchValue"  @keyup.enter="enter" @keydown.down='change()' @keydown.up='up()' />
+          <input v-model="searchValue"  @keyup.enter="searchHandler" />
           <div class="icon">
             <i class="iconfont icon-dingweiweizhi"></i>
           </div>
@@ -124,7 +124,7 @@ export default {
     // 点击搜索
     searchHandler() {
       this.$store.commit('searchValue', this.searchValue)
-      this.$router.push({ path: '/qqhblb' })
+      this.$router.push({ path: '/search', query: {searchValue : this.searchValue} })
     },
     onHeadClick() {
       this.menuData.map(item => {
@@ -135,13 +135,6 @@ export default {
     },
     logout() {
       this.$router.push({ path: 'login' })
-    },
-    enter: function() {
-      this.$router.push({
-        path: '/peopleDetail',
-        query: { id: this.selectedObj.id }
-      })
-      this.suggestions = []
     },
     onDropDownListShow() {
       this.isSelectShow = !this.isSelectShow
@@ -263,13 +256,12 @@ export default {
       max-width: @maxWidth;
       margin: 0 auto;
       display: flex;
-      //   justify-content: center;
       height: auto;
       .oneLi {
         float: left;
         cursor: pointer;
         span {
-          padding: 0 35 * @base;
+          padding: 0 30 * @base;
         }
       }
       .active {

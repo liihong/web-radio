@@ -7,6 +7,7 @@ export default {
   getTopOne: '/news/getTopOne',
 
 
+  getSearch: '/home/search', // value
   // 获取新闻接口 （国际新闻   省市新闻 焦点等等 默认前5条 取出）
   getNews: '/news/getNews',
   // 根据新闻id 获取新闻信息

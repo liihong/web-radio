@@ -8,7 +8,7 @@
           </div>
           <ul>
             <li class="clearFix" v-for="(news, index) in newsList" :key="index" v-if="index < count">
-              <router-link class="link" :to="{ path: 'newsDetail', query: { id: news.id }}">
+              <router-link target="_blank" class="link" :to="{ path: 'newsDetail', query: { id: news.id }}">
                 <div class="newstxt-title">{{news.title}}</div>
                 <div v-show="!showImg" class="time">{{news.sendDate}}</div>
               </router-link>
