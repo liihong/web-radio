@@ -73,7 +73,7 @@ html{
    z-index: -9999;
  }
  /*滚动条样式设置*/
- ::-webkit-scrollbar {
+ /* ::-webkit-scrollbar {
    width: 1px;
    height: 1px;
  }
@@ -93,7 +93,7 @@ html{
    width: 1px;
    background-color: rgba(125, 125, 125, 0.7);
    -webkit-border-radius: 2px;
- }
+ } */
 
  .pointer{
   cursor:pointer
