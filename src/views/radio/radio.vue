@@ -71,12 +71,8 @@ export default {
       channel: {},
       jiemus: [],
       notice: [],
-      peopleList: []
-    }
-  },
-  computed: {
-    id() {
-      return this.$route.meta.id
+      peopleList: [],
+      id: this.$route.meta.id
     }
   },
   methods: {
@@ -128,6 +124,12 @@ export default {
   },
   mounted() {
     this.initData()
+  },
+  watch:{
+    $route(to){
+      this.id = to.meta.id
+      this.initData()
+    }
   }
 }
 </script>

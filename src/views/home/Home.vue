@@ -27,7 +27,7 @@
       <div class="block1">
         <NewsCard :newTypes="newTypes[1]" :newsList="newsList[20]" @moreClick="moreClick(newTypes[1])" :count="10"></NewsCard>
        <Advertising  v-for="(item,i) in Advertising2" :key="i" :item="item" :height="150"/>
-        <NewsCard :newTypes="newTypes[2]" :newsList="newsList[21]" @moreClick="moreClick(newTypes[2])" :count="3"></NewsCard>
+        <NewsCard :newTypes="newTypes[2]" :newsList="newsList[21]" @moreClick="moreClick(newTypes[2])" :count="5"></NewsCard>
       </div>
       <div class="block2">
         <Card name="在线收听" more="">

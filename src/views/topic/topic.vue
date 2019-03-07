@@ -14,7 +14,6 @@
                 </div>
             </el-col>
             <div class="noData" v-show="specialsList.length < 0">暂无数据</div>
-          
         </el-row>
     </div>
 </template>
@@ -58,6 +57,7 @@ export default {
     .cover {
       margin: 8 * @base 10*@base;
       overflow: hidden;
+      height: 180*@base;
       img {
         height: 100%;
         width: 100%;

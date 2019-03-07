@@ -26,6 +26,7 @@ export default new Router({
         {
           path: '/search',
           name: '搜索结果',
+          hidden: true,
           component: () => import(/* webpackChunkName: 'NewsDetail' */ './views/search/index')
         },
         {
@@ -47,22 +48,26 @@ export default new Router({
         },{
           path: '/fm926',
           name: 'FM92.6',
+          hidden: true,
           meta: {id: 3},
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
         },{
           path: '/am1287',
           name: 'AM1287',
           meta: {id: 5},
+          hidden: true,
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
         },{
           path: '/fm102',
           name: 'FM102',
           meta: {id: 4},
+          hidden: true,
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
         },{
           path: '/am927',
           name: 'AM927',
           meta: {id: 2},
+          hidden: true,
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
         },{
           path: '/peopleList',
