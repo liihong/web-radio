@@ -40,6 +40,8 @@ export default {
         id: this.newsId
       }).then(res=>{
         this.newsDetail = res.data.content
+        document.title=this.newsDetail.title
+        
       })
     },
     goBack() {
@@ -82,6 +84,9 @@ export default {
     margin-top:13*@base;
     padding-top:20*@base;
     border-top:2px solid #D8DCE1;
+    img{
+      width: 100%;
+    }
   }
     
 }
