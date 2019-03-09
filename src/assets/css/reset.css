@@ -21,7 +21,7 @@ KISSY CSS Reset
  sup { vertical-align:text-top; }
  sub{ vertical-align:text-bottom; }
  legend { color:#000; }
- fieldset, img { border:0; }
+ fieldset, img { border:0;width: 100% }
  input,button,select,textarea{outline:none; background: none;}
  button, input, select, textarea { font-size:100%; -webkit-appearance: none;border:0}
  table { border-collapse:collapse; border-spacing:0; }

@@ -43,20 +43,24 @@ export default new Router({
           path: '/fm926',
           name: 'FM92.6',
           meta: {id: 3},
+          hidden: true,
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
         },{
           path: '/am1287',
           name: 'AM1287',
           meta: {id: 5},
+          hidden: true,
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
         },{
           path: '/fm102',
           name: 'FM102',
           meta: {id: 4},
+          hidden: true,
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
         },{
           path: '/am927',
           name: 'AM927',
+          hidden: true,
           meta: {id: 2},
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
         },{
