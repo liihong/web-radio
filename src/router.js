@@ -70,6 +70,23 @@ export default new Router({
           hidden: true,
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
         },{
+          path: '/seminar',
+          name: '专题',
+          component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/people/peopleIndex'),
+          children: [
+            {
+              path: '/',
+              name: '专题列表',
+              hidden: true,
+              component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/topic/topic')
+            },{
+              path: '/seminarDetail',
+              name: '专题详情',
+              hidden: true,
+              component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/topic/topicDetail')
+            }
+          ]
+        },{
           path: '/peopleList',
           name: '主持人',
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/people/peopleIndex'),
@@ -88,23 +105,6 @@ export default new Router({
           path: '/video',
           name: '视频',
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/video/video')
-        },{
-          path: '/seminar',
-          name: '专题',
-          component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/people/peopleIndex'),
-          children: [
-            {
-              path: '/',
-              name: '专题列表',
-              hidden: true,
-              component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/topic/topic')
-            },{
-              path: '/seminarDetail',
-              name: '专题详情',
-              hidden: true,
-              component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/topic/topicDetail')
-            }
-          ]
         }
       ]
     },

@@ -140,21 +140,7 @@ export default {
       this.isSelectShow = !this.isSelectShow
     },
     changed: function() {
-      var that = this
       this.suggestions = []
-      if (this.searchValue.length > 0) {
-        this.$ajax
-          .get(this.$api.selectPersonInfoList, {
-            name: this.searchValue
-          })
-          .then(res => {
-            if (res && res.data) {
-              res.data.data.forEach(function(a) {
-                that.suggestions.push(a)
-              })
-            }
-          })
-      }
     },
     //            按下键往下选择
     change: function() {
@@ -259,10 +245,12 @@ export default {
       height: auto;
       .oneLi {
         float: left;
+        width: 180*@base;
         cursor: pointer;
-        span {
-          padding: 0 30 * @base;
-        }
+        text-align: center;
+        // span {
+        //   padding: 0 30 * @base;
+        // }
       }
       .active {
         background: #7D0000;

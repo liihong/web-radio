@@ -83,6 +83,11 @@ export default {
   mounted() {
     this.activeId = this.$route.query.id
     this.getNews(this.activeId)
+  },
+  watch:{
+     searchValue() {
+      this.getNews()
+    }
   }
 }
 </script>
