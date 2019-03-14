@@ -17,6 +17,7 @@ KISSY CSS Reset
  small{ font-size:14px; }
  ul, ol { list-style:none; }
  a { text-decoration:none; color: #464545;}
+ u { text-decoration:none; }
  a:hover { text-decoration:none; }
  sup { vertical-align:text-top; }
  sub{ vertical-align:text-bottom; }

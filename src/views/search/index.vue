@@ -58,8 +58,8 @@ export default {
         .then(res => {
           if (res.data && res.data.content) {
             let data = res.data.content
-            this.newsList = data.news
-            this.specialsList = data.specials
+            this.newsList = data.news.reverse()
+            this.specialsList = data.specials.reverse()
             this.total = data.news.total
           }
         })
