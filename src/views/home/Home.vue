@@ -3,12 +3,12 @@
     <!--广告位1-->
     <!-- <Advertising v-for="(item,i) in Advertising1" :key="i" :item="item" /> -->
     <div v-html="Advertising1"></div>
-    <div class="row1" >
-      <div v-html="topNews">
+    <div class="row1">
+      <div class="topNews" v-html="topNews">
       </div>
-      <div class="subHeadline">
+      <!-- <div class="subHeadline">
         <router-link target="_blank" :to="{ path: 'newsDetail', query: { id: item.id }}" v-for="(item, $index) in topNewsTwo" :key="$index">{{item.title}} &nbsp;&nbsp;&nbsp;</router-link>
-      </div>
+      </div> -->
       <span class="toutiao"></span>
     </div>
     <div class="line1">
@@ -129,7 +129,6 @@ export default {
         .catch(err => {
           console.log(err)
         })
-        
     },
     newslist() {
       this.$ajax.get(this.$api.getNews).then(res => {
@@ -168,7 +167,7 @@ export default {
         })
         .then(res => {
           if (res.data.status === 200) {
-            this.topNews  = res.data.content.html
+            this.topNews = res.data.content.html
           } else {
             console.log('轮播图列表数据请求失败!')
           }
@@ -191,10 +190,11 @@ export default {
     height: 99 * @base;
     .topNews {
       text-align: center;
-      height: 36px;
-      // font-size: 45 * @base;
-      font-weight: 900;
-      padding: 14px 0;
+      position: absolute;
+      width: 100%;
+      margin: 0 auto;
+      top: 50%;
+      transform: translateY(-50%);
       overflow: hidden;
       text-overflow: ellipsis;
       word-wrap: break-word;

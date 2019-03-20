@@ -11,7 +11,7 @@ KISSY CSS Reset
    font:16px/1.5 "Microsoft YaHei","微软雅黑","Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB",Arial,sans-serif,tahoma, arial, \5b8b\4f53;
  }
  h1, h2, h3, h4, h5, h6{ font-size:100%; font-weight: normal;}
- strong,b,th{font-weight:normal;}
+ /* strong,b,th{font-weight:normal;} */
  address, cite, dfn, em, var,i { font-style:normal; }
  code, kbd, pre, samp { font-family:couriernew, courier, monospace; }
  small{ font-size:14px; }

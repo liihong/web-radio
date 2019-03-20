@@ -1,6 +1,6 @@
 <template>
-    <div class="services">
-        <ul class="gy-ul_bbx">
+    <div class="services" v-html="infos">
+        <!-- <ul class="gy-ul_bbx">
             <li>
                 <a href="http://www.weizhang8.cn/" target="_blank">
                     <i class="iconfont icon-kejian"></i>
@@ -74,19 +74,46 @@
                 </a>
             </li>
 
-        </ul>
+        </ul> -->
     </div>
 </template>
 
 <script>
 export default {
-  name: 'services'
+  name: 'services',
+  data(){
+      return{
+          infos: ''
+      }
+  },
+  mounted() {
+      this.initData()
+  },
+  methods: {
+    initData() {
+      this.$ajax
+        .get(this.$api.getHTML, {
+          type: 0
+        })
+        .then(res => {
+          if (res.data.status === 200) {
+            this.infos = res.data.content.html
+          } else {
+            console.log('服务请求失败!')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 .services {
-   margin-top:10*@base;
-   background: #F6F8FB;
+  margin-top: 10 * @base;
+  background: #f6f8fb;
+  max-width: 380*@base;
   .gy-ul_bbx {
     margin-top: 10px;
     margin: 0 auto;
@@ -101,7 +128,7 @@ export default {
       border: 1px solid #ccc;
       float: left;
       display: flex;
-      background: #F6F8FB;
+      background: #f6f8fb;
       justify-content: center;
       align-items: center;
       i {
