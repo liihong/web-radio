@@ -42,7 +42,8 @@
       m = today.getMinutes(),
       s = today.getSeconds();
       let dom = document.getElementById("setDays")
-      let date2 = dom.getAttribute('data-date')
+      console.log(dom)
+      let date2 = dom.getAttribute('class')
     var stopTime = new Date(date2), //结束时间
       stopH = stopTime.getHours(),
       stopM = stopTime.getMinutes(),
@@ -55,7 +56,7 @@
       shengyuM = parseInt(H / (60 * 1000)), //除去天的毫秒数转换成分钟
       M = H - shengyuM * 60 * 1000; //除去天、小时、分的毫秒数
     S = parseInt((shenyu - shengyuD * 60 * 60 * 24 * 1000 - shengyuH * 60 * 60 * 1000 - shengyuM * 60 * 1000) / 1000) //除去天、小时、分的毫秒数转化为秒
-    dom.innerHTML = (shengyuD);
+    dom.innerHTML = (shengyuD) ;
     // setTimeout("clock()",500);
     // setTimeout(clock, 0);
   }

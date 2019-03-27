@@ -2,7 +2,7 @@
   <div class="home">
     <!--广告位1-->
     <!-- <Advertising v-for="(item,i) in Advertising1" :key="i" :item="item" /> -->
-    <h1 id="setDays" data-date="2019-04-05">${shengyuD}</h1>
+   
     <div v-html="Advertising1"></div>
     <div class="row1">
       <div class="topNews" v-html="topNews">
