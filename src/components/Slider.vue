@@ -67,15 +67,15 @@ export default {
     let vm = this
     this.$nextTick(() => {
       /*鼠标移入停止轮播，鼠标离开 继续轮播*/
-      console.log(this.swiper)
 
       var comtainer = document.getElementById('swiper_container')
-      console.log(comtainer)
-      comtainer.onmouseenter = function() {
-        vm.swiper.autoplay.stop()
-      }
-      comtainer.onmouseleave = function() {
-        vm.swiper.autoplay.start()
+      if(comtainer){
+        comtainer.onmouseenter = function() {
+          vm.swiper.autoplay.stop()
+        }
+        comtainer.onmouseleave = function() {
+          vm.swiper.autoplay.start()
+        }
       }
     })
   },

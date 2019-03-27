@@ -41,7 +41,6 @@ export default {
           this.channels = this.audioData.jiemus
           let pindao = res.data.content.channels
           this.lmtAddress = pindao[0]['lmtAddress']
-          console.log(this.lmtAddress)
         } else {
           console.log('获取频率节目列表失败!')
         }

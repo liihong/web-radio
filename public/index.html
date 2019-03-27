@@ -1,45 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>许昌广播网</title>
-    <meta name="keywords" content="许昌电台,许昌人民广播电台,许昌广播网,许昌,电台,xcdt"/>
-    <meta name="description" content="许昌电台"/>
-    <meta name="referrer" content="never"/>
-    
-  </head>
-  <script type="text/javascript">
 
-    var ua = navigator.userAgent;
-    
-    var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
-    
-    isIphone =!ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
-    
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>许昌广播网</title>
+  <meta name="keywords" content="许昌电台,许昌人民广播电台,许昌广播网,许昌,电台,xcdt" />
+  <meta name="description" content="许昌电台" />
+  <meta name="referrer" content="never" />
+
+</head>
+<script type="text/javascript">
+  var ua = navigator.userAgent;
+
+  var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+
+    isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+
     isAndroid = ua.match(/(Android)\s+([\d.]+)/),
-    
+
     isMobile = isIphone || isAndroid;
-    
-    //判断
-    
-    if(isMobile){
-    let url =  window.location.href;
-        if(url.indexOf("phone") == -1){
-          window.location.href = window.location.href.replace('.cn/','.cn/phone/#/')
-        }
-    }else{
-    
+
+  //判断
+
+  if (isMobile) {
+    let url = window.location.href;
+    if (url.indexOf("phone") == -1) {
+      window.location.href = window.location.href.replace('.cn/', '.cn/phone/#/')
     }
-    
-    </script>
-  <body>
-    <noscript>
-      <strong>非常抱歉，您使用的浏览器不支持当前网站，请更换浏览器</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+  } else {
+
+  }
+
+  window.onload = clock;
+
+  function clock() {
+    var today = new Date(), //当前时间
+      h = today.getHours(),
+      m = today.getMinutes(),
+      s = today.getSeconds();
+      let dom = document.getElementById("setDays")
+      let date2 = dom.getAttribute('data-date')
+    var stopTime = new Date(date2), //结束时间
+      stopH = stopTime.getHours(),
+      stopM = stopTime.getMinutes(),
+      stopS = stopTime.getSeconds();
+    var shenyu = stopTime.getTime() - today.getTime(), //倒计时毫秒数
+      shengyuD = parseInt(shenyu / (60 * 60 * 24 * 1000)), //转换为天
+      D = parseInt(shenyu) - parseInt(shengyuD * 60 * 60 * 24 * 1000), //除去天的毫秒数
+      shengyuH = parseInt(D / (60 * 60 * 1000)), //除去天的毫秒数转换成小时
+      H = D - shengyuH * 60 * 60 * 1000, //除去天、小时的毫秒数
+      shengyuM = parseInt(H / (60 * 1000)), //除去天的毫秒数转换成分钟
+      M = H - shengyuM * 60 * 1000; //除去天、小时、分的毫秒数
+    S = parseInt((shenyu - shengyuD * 60 * 60 * 24 * 1000 - shengyuH * 60 * 60 * 1000 - shengyuM * 60 * 1000) / 1000) //除去天、小时、分的毫秒数转化为秒
+    dom.innerHTML = (shengyuD);
+    // setTimeout("clock()",500);
+    // setTimeout(clock, 0);
+  }
+</script>
+
+<body>
+  <noscript>
+    <strong>非常抱歉，您使用的浏览器不支持当前网站，请更换浏览器</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>

@@ -121,8 +121,8 @@ export default {
     padding-bottom: 5px;
     text-align: center;
     li {
-      height: 85px;
-      width: 85px;
+      height: 93*@base;
+      width: 93*@base;
       overflow: hidden;
       line-height: 30px;
       border: 1px solid #ccc;
