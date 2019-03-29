@@ -24,9 +24,9 @@
     <div class="line2">
       <div class="block1">
         <NewsCard :newTypes="newTypes[1]" :newsList="newsList[20]" @moreClick="moreClick(newTypes[1])" :count="10"></NewsCard>
-        <Advertising v-for="(item,i) in Advertising2" :key="i" :item="item" :height="150" />
         <NewsCard :newTypes="newTypes[2]" :newsList="newsList[21]" @moreClick="moreClick(newTypes[2])" :count="5"></NewsCard>
       </div>
+      
       <div class="block2">
         <Card name="在线收听" more="">
           <onLineLive></onLineLive>
@@ -36,16 +36,20 @@
         </Card>
       </div>
     </div>
+   <div v-html="Advertising2"></div>
+    
     <div class="line2">
       <NewsCard :newTypes="newTypes[3]" showImg :newsList="newsList[22]" class="block1" @moreClick="moreClick(newTypes[3])"></NewsCard>
       <NewsCard :newTypes="newTypes[4]" showImg :newsList="newsList[23]" class="block1" @moreClick="moreClick(newTypes[4])"></NewsCard>
       <NewsCard :newTypes="newTypes[5]" showImg :newsList="newsList[24]" class="block1" @moreClick="moreClick(newTypes[5])"></NewsCard>
     </div>
+    <div v-html="Advertising3"></div>
     <div class="line2">
       <Card name="主持人" @moreClick="openPeople()">
         <picSwiper :picData="peopleList"></picSwiper>
       </Card>
     </div>
+    <div v-html="Advertising4"></div>
   </div>
 </template>
 
@@ -67,7 +71,9 @@ export default {
   data() {
     return {
       Advertising1: '',
-      Advertising2: [],
+      Advertising2: '',
+      Advertising3: '',
+      Advertising4: '',
       topNews: {},
       topNewsTwo: [],
       invTime: 2000,
@@ -130,6 +136,51 @@ export default {
         .catch(err => {
           console.log(err)
         })
+        this.$ajax
+        .get(this.$api.getHTML, {
+          type: 4
+        })
+        .then(res => {
+          if (res.data.status === 200) {
+            let data = res.data.content
+            this.Advertising2 = data.html
+          } else {
+            console.log('轮播图列表数据请求失败!')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        this.$ajax
+        .get(this.$api.getHTML, {
+          type: 6
+        })
+        .then(res => {
+          if (res.data.status === 200) {
+            let data = res.data.content
+            this.Advertising3 = data.html
+          } else {
+            console.log('轮播图列表数据请求失败!')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        this.$ajax
+        .get(this.$api.getHTML, {
+          type: 7
+        })
+        .then(res => {
+          if (res.data.status === 200) {
+            let data = res.data.content
+            this.Advertising4 = data.html
+          } else {
+            console.log('轮播图列表数据请求失败!')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     newslist() {
       this.$ajax.get(this.$api.getNews).then(res => {
@@ -151,17 +202,6 @@ export default {
       })
     },
     getTopNews() {
-      // this.$ajax.get(this.$api.getTopOne).then(res => {
-      //   if (res.data.status === 200) {
-      //     this.topNews = res.data.content.topOne[0]
-      //     if (this.topNews.title.length > 32) {
-      //       this.topNews.title = this.topNews.title.substr(0, 31) + '...'
-      //     }
-      //     this.topNewsTwo = res.data.content.topOne.slice(1, 3)
-      //   } else {
-      //     console.log('头条数据获取失败!')
-      //   }
-      // })
       this.$ajax
         .get(this.$api.getHTML, {
           type: 5
