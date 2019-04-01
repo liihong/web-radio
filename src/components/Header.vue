@@ -52,7 +52,7 @@
     </div>
     <div class="menu">
       <ul class="oneLevel">
-        <li v-if="!item.hidden" class="oneLi" @click.stop="changeMenu(item, '1')" v-for="(item,index) in menuData" :key="index" :class="(activeMenu.indexOf(item.path) > -1 ? 'active' : '')">
+        <li v-if="!item.hidden" class="oneLi" @click.stop="changeMenu(item, '1')" v-for="(item,index) in menuData" :key="index" :class="(activeMenu == item.path ? 'active' : '')">
           <span>{{item.name}}</span>
           <ul class="towLevel" v-if="isSubMenuShow">
             <li v-if="!el.hidden" v-for="(el,i) in item.children" :key="`list_${i}`" @click.stop="changeMenu(el, '2')">{{el.name}}</li>

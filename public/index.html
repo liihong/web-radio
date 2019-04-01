@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <title>许昌广播网</title>
   <meta name="keywords" content="许昌电台,许昌人民广播电台,许昌广播网,许昌,电台,xcdt" />
@@ -55,7 +56,7 @@
       M = H - shengyuM * 60 * 1000; //除去天、小时、分的毫秒数
     S = parseInt((shenyu - shengyuD * 60 * 60 * 24 * 1000 - shengyuH * 60 * 60 * 1000 - shengyuM * 60 * 1000) / 1000) //除去天、小时、分的毫秒数转化为秒
     dom.innerHTML = (shengyuD) ;
-    setTimeout("clock()",500);
+    setTimeout("clock()",1000);
   }
 </script>
 

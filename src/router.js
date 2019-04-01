@@ -12,9 +12,8 @@ export default new Router({
       path: '/',
       name: '首页',
       component: Index,
-      redirect: '/index',
       children: [{
-          path: '/index',
+          path: '/',
           name: '首页',
           component: () => import(/* webpackChunkName: 'Home' */ './views/home/Home')
         },

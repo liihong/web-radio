@@ -21,6 +21,7 @@
         </div>
       </div>
     </div>
+    <div v-html="Advertising"></div>
     <div class="line2">
       <div class="block1">
         <NewsCard :newTypes="newTypes[1]" :newsList="newsList[20]" @moreClick="moreClick(newTypes[1])" :count="10"></NewsCard>
@@ -70,6 +71,7 @@ export default {
   },
   data() {
     return {
+      Advertising: '',
       Advertising1: '',
       Advertising2: '',
       Advertising3: '',
@@ -114,6 +116,21 @@ export default {
             this.slides = data.shufflingImages
             // this.Advertising1 = data.topImages
             // this.Advertising2 = data.centerImages
+          } else {
+            console.log('轮播图列表数据请求失败!')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        this.$ajax
+        .get(this.$api.getHTML, {
+          type: 1
+        })
+        .then(res => {
+          if (res.data.status === 200) {
+            let data = res.data.content
+            this.Advertising = data.html
           } else {
             console.log('轮播图列表数据请求失败!')
           }
