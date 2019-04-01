@@ -41,6 +41,7 @@ export default {
         id: this.newsId
       }).then(res=>{
         this.newsDetail = res.data.content
+        document.title=this.newsDetail.title
       })
     },
     goBack() {

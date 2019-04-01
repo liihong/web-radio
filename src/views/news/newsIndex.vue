@@ -57,7 +57,8 @@ export default {
         })
     },
     openDetail(id) {
-      this.$router.push({ path: 'newsDetail', query: { id: id } })
+      let routeData = this.$router.resolve({path: 'newsDetail', query: { id: id } })
+      window.open(routeData.href, '_blank')
     },
     moreClick(id) {
       this.$router.push({path: '/newsList', query: { id }})

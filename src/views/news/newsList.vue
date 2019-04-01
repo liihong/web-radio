@@ -16,7 +16,7 @@
                 </div>
                 <div class="noData" v-show="total == 0">暂无数据</div>
                 <div class="pagination">
-                    <el-pagination class="qz-pagination" :page-sizes="[20, 40, 80, 150]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="total" @current-change="changePage">
+                    <el-pagination class="qz-pagination"  @size-change="sizeChange" :page-sizes="[20, 40, 80, 150]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="total" @current-change="changePage">
                     </el-pagination>
                 </div>
             </el-card>
@@ -81,10 +81,16 @@ export default {
       this.$router.go(-1)
     },
     openDetail(id) {
-      this.$router.push({ path: 'newsDetail', query: { id: id } })
+      let routeData = this.$router.resolve({path: 'newsDetail', query: { id: id } })
+      window.open(routeData.href, '_blank')
     },
     changePage(val) {
       this.pageNumber = val
+      this.getNews(this.activeId)
+    },
+    sizeChange(val) {
+      this.pageSize = val
+      this.pageNumber = 1
       this.getNews(this.activeId)
     }
   },
