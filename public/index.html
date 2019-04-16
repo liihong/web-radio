@@ -41,6 +41,9 @@
       m = today.getMinutes(),
       s = today.getSeconds();
       let dom = document.getElementById("setDays")
+      if(!dom) {
+        return
+      }
       let date2 = dom.getAttribute('class')
     var stopTime = new Date(date2), //结束时间
       stopH = stopTime.getHours(),

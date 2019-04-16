@@ -29,6 +29,12 @@ export default new Router({
           component: () => import(/* webpackChunkName: 'NewsDetail' */ './views/search/index')
         },
         {
+          path: '/searchList',
+          name: '搜索结果列表',
+          hidden: true,
+          component: () => import(/* webpackChunkName: 'NewsDetail' */ './views/search/searchList')
+        },
+        {
           path: '/newsList',
           hidden: true,
           name: '新闻列表',
@@ -104,6 +110,11 @@ export default new Router({
           path: '/video',
           name: '视频',
           component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/video/video')
+        },{
+          path: '/videoDetail',
+          name: '视频',
+          hidden: true,
+          component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/video/videoDetail')
         }
       ]
     },

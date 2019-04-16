@@ -64,7 +64,6 @@ export default {
       })
       this.lmtAddress = pindao[0]['lmtAddress']
       this.$refs.audio.play()
-      console.log(this.lmtAddress)
       this.getJieMu()
     }
   }

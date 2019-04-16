@@ -21,8 +21,7 @@ module.exports = {
     proxy: {
       '/api': {
         // 目标 API 地址
-        // target: 'https://www.xcdt.cn/admin/api/',
-        target: 'http://www.xcdt.cn/api/',
+        target: 'http://www.xcdt.cn/admin/api/',
         // 如果要代理 websockets
         // ws: true,
         // 将主机标头的原点更改为目标URL

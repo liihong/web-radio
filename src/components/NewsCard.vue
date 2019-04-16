@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Card :name="textName" @moreClick="moreClick">
+    <Card :name="textName" :more="more" @moreClick="moreClick">
       <div class="news-wrapper" v-cloak>
         <div ref="newsBox" class="news-box">
           <div class="cover" v-show="showImg && imgSrc">
@@ -8,7 +8,7 @@
           </div>
           <ul>
             <li class="clearFix" v-for="(news, index) in newsList" :key="index" v-if="index < count">
-              <router-link target="_blank" class="link" :to="{ path: 'newsDetail', query: { id: news.id }}">
+              <router-link target="_blank" class="link" :to="{ path: detailPath, query: { id: news.id }}">
                 <div class="newstxt-title">{{news.title}}</div>
                 <div v-show="!showImg" class="time">{{news.sendDate}}</div>
               </router-link>
@@ -45,6 +45,14 @@ export default {
     count: {
       type: Number,
       default: 6
+    },
+    more: {
+      tyle: String,
+      default: '更多>>'
+    },
+    detailPath: {
+      type: String,
+      default: 'newsDetail'
     }
   },
   data() {

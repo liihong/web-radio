@@ -1,9 +1,14 @@
 <template>
     <div class="newsList">
+        <div class="left">
+            <el-card>
+                <ul>
+                    <li :class="{'actived': activeId== item.id}" class="pointer" @click="ChangeType(item.id)" v-for="(item,i) in typeList" :key="i">{{item.name}}</li>
+                </ul>
+            </el-card>
+        </div>
         <div class="right">
-           <NewsCard name="相关新闻" @moreClick="moreClick('1')" :more="more" :newsList="newsList"></NewsCard>
-           <NewsCard name="相关专题" @moreClick="moreClick('2')" :more="more" v-if="specialsList.length>0" :detailPath="'topicDetail'" :newsList="specialsList"></NewsCard>
-            <!-- <el-card class="list">
+            <el-card class="list">
                 <div class="info pointer" @click="openDetail(item.id)" v-for="(item,i) in newsList" :key="i" :news="item">
                     <i class="circle"></i>
                     <span class="title">{{item.title}}</span>
@@ -11,38 +16,33 @@
                 </div>
                 <div class="noData" v-show="total == 0">暂无数据</div>
                 <div class="pagination">
-                    <el-pagination class="qz-pagination" :page-sizes="[20, 40, 80, 150]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="total" @current-change="changePage">
+                    <el-pagination class="qz-pagination"  @size-change="sizeChange" :page-sizes="[20, 40, 80, 150]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="total" @current-change="changePage">
                     </el-pagination>
                 </div>
-            </el-card> -->
+            </el-card>
         </div>
     </div>
 </template>
 
 <script>
-import NewsCard from '@/components/NewsCard'
 export default {
-  name: 'search',
-  components: {
-    NewsCard
-  },
+  name: 'newsDetail',
+  components: {},
   data() {
     return {
       newsList: [],
       typeList: [],
       todayNews: [],
-      specialsList: [],
       hotNews: [],
       total: 0,
       pageSize: 20,
       pageNumber: 1,
-      activeId: '',
-      more: '更多搜索结果>>'
+      activeId: ''
     }
   },
   computed: {
-    searchValue() {
-      return this.$route.query.searchValue
+    newsId() {
+      return this.$route.query.id
     }
   },
   methods: {
@@ -53,20 +53,25 @@ export default {
         }
    
       this.$ajax
-        .get(this.$api.getSearch, {
-          value: this.searchValue
+        .get(this.$api.getNewsByType, {
+          id: typeid,
+          'page.pn': this.pageNumber,
+          'page.size': this.pageSize
         })
         .then(res => {
           if (res.data && res.data.content) {
             let data = res.data.content
-            this.newsList = data.news.reverse()
-            this.specialsList = data.specials.reverse()
+            this.newsList = data.news.rows
             this.total = data.news.total
           }
         })
     },
-    moreClick(type){
-      this.$router.push({ path: 'newsDetail', query: { searchValue: this.searchValue, type } })
+    getNewsType() {
+      this.$ajax.get(this.$api.getNewsType).then(res => {
+        if (res.data && res.data.content) {
+          this.typeList = res.data.content.types
+        }
+      })
     },
     ChangeType(id){
       this.activeId = id
@@ -76,27 +81,49 @@ export default {
       this.$router.go(-1)
     },
     openDetail(id) {
-      this.$router.push({ path: 'newsDetail', query: { id: id } })
+      let routeData = this.$router.resolve({path: 'newsDetail', query: { id: id } })
+      window.open(routeData.href, '_blank')
     },
     changePage(val) {
       this.pageNumber = val
+      this.getNews(this.activeId)
+    },
+    sizeChange(val) {
+      this.pageSize = val
+      this.pageNumber = 1
       this.getNews(this.activeId)
     }
   },
   mounted() {
     this.activeId = this.$route.query.id
     this.getNews(this.activeId)
-  },
-  watch:{
-     searchValue() {
-      this.getNews()
-    }
+    this.getNewsType()
   }
 }
 </script>
 <style lang="less" scoped>
 .newsList {
+  display: flex;
+  .left {
+    flex: 0.3;
+    ul {
+      li {
+        color: @themeColor;
+        font-weight: 900;
+        background-color: #f5f5f5;
+        border-color: #ddd;
+        margin-top: 10px;
+        padding: 10px;
+        text-align: center;
+      }
+      .actived{
+            color: #ffffff;
+            background: @themeColor;
+      }
+    }
+  }
   .right {
+    flex: 0.7;
     margin-left: 10 * @base;
     .list {
       .info {
