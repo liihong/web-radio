@@ -59,14 +59,14 @@ export default {
         .then(res => {
           if (res.data && res.data.content) {
             let data = res.data.content
-            this.newsList = data.news.reverse()
-            this.specialsList = data.specials.reverse()
+            this.newsList = data.news.rows.reverse()
+            this.specialsList = data.specials.rows.reverse()
             this.total = data.news.total
           }
         })
     },
     moreClick(type){
-      this.$router.push({ path: 'newsDetail', query: { searchValue: this.searchValue, type } })
+      this.$router.push({ path: 'searchList', query: { searchValue: this.searchValue, type } })
     },
     ChangeType(id){
       this.activeId = id

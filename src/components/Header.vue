@@ -165,6 +165,9 @@ export default {
   watch: {
     searchValue() {
       this.changed()
+    },
+    $route(form,to){
+       this.searchValue = form.query.searchValue
     }
   }
 }

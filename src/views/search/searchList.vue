@@ -31,47 +31,54 @@ export default {
   data() {
     return {
       newsList: [],
-      typeList: [],
+      typeList: [{
+        id: '1',
+        name: '新闻'
+      },{
+        id: '2',
+        name: '专题'
+      }],
       todayNews: [],
       hotNews: [],
       total: 0,
       pageSize: 20,
       pageNumber: 1,
-      activeId: ''
+      activeId: this.$route.query.type || '1'
     }
   },
   computed: {
     newsId() {
       return this.$route.query.id
+    },
+    searchValue() {
+      return this.$route.query.searchValue
     }
   },
   methods: {
     getNews(id) {
-        let typeid = id
-        if(typeid == ''){
-            typeid = this.newsId
-        }
-   
+      let typeId = id
+      if(typeId == ''){
+        typeId = this.activeId
+      }
       this.$ajax
-        .get(this.$api.getNewsByType, {
-          id: typeid,
+        .get(this.$api.getSearch, {
+          type: typeId,
+          value: this.searchValue,
           'page.pn': this.pageNumber,
           'page.size': this.pageSize
         })
         .then(res => {
           if (res.data && res.data.content) {
             let data = res.data.content
-            this.newsList = data.news.rows
-            this.total = data.news.total
+            if(this.activeId == '1'){
+              this.newsList = data.news.rows
+              this.total = data.news.total
+            } else{
+              this.newsList = data.specials.rows
+              this.total = data.specials.total
+            }
           }
         })
-    },
-    getNewsType() {
-      this.$ajax.get(this.$api.getNewsType).then(res => {
-        if (res.data && res.data.content) {
-          this.typeList = res.data.content.types
-        }
-      })
     },
     ChangeType(id){
       this.activeId = id
@@ -82,6 +89,9 @@ export default {
     },
     openDetail(id) {
       let routeData = this.$router.resolve({path: 'newsDetail', query: { id: id } })
+      if(this.activeId == '2'){
+        routeData = this.$router.resolve({path: 'seminarDetail', query: { id: id } })
+      }
       window.open(routeData.href, '_blank')
     },
     changePage(val) {
@@ -95,9 +105,7 @@ export default {
     }
   },
   mounted() {
-    this.activeId = this.$route.query.id
-    this.getNews(this.activeId)
-    this.getNewsType()
+    this.getNews()
   }
 }
 </script>
