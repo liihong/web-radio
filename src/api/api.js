@@ -57,6 +57,6 @@ export default {
   getVideos: '/videos/getVideos',
 
   getVideoDetial: '/videos/getVideo',
-
+  getFrontMenus:'/frontMenus/getFrontMenus',
   getHTML: '/thePeopleServices/getHtml'
 }
