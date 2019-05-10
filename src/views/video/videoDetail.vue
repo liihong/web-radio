@@ -12,8 +12,9 @@
                 <span>发布时间：{{newsDetail.createAt}}</span>
             </div>
             <p class="newsContent">
-                <video width="80%" height="500" controls  autoplay="autoplay">
-                    <source :src="newsDetail.linkAddress" type="video/ogg"> 您的浏览器不支持Video标签。
+                <video ref="video" width="80%" height="500" controls  autoplay="autoplay">
+                    <!-- <source :src="newsDetail.linkAddress" type="video/ogg">  -->
+                    您的浏览器不支持Video标签。
                 </video>
             </p>
             <div class="share"></div>
@@ -46,6 +47,7 @@ export default {
         })
         .then(res => {
           this.newsDetail = res.data.content
+          this.$refs.video.src = res.data.content.linkAddress
         })
     },
     goBack() {
