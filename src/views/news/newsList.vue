@@ -1,27 +1,27 @@
 <template>
-    <div class="newsList">
-        <div class="left">
-            <el-card>
-                <ul>
-                    <li :class="{'actived': activeId== item.id}" class="pointer" @click="ChangeType(item.id)" v-for="(item,i) in typeList" :key="i">{{item.name}}</li>
-                </ul>
-            </el-card>
-        </div>
-        <div class="right">
-            <el-card class="list">
-                <div class="info pointer" @click="openDetail(item.id)" v-for="(item,i) in newsList" :key="i" :news="item">
-                    <i class="circle"></i>
-                    <span class="title">{{item.title}}</span>
-                    <span class="date">{{item.sendDate}}</span>
-                </div>
-                <div class="noData" v-show="total == 0">暂无数据</div>
-                <div class="pagination">
-                    <el-pagination class="qz-pagination"  @size-change="sizeChange" :page-sizes="[20, 40, 80, 150]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="total" @current-change="changePage">
-                    </el-pagination>
-                </div>
-            </el-card>
-        </div>
+  <div class="newsList">
+    <div class="left">
+      <el-card>
+        <ul>
+          <li :class="{'actived': activeId== item.id}" class="pointer" @click="ChangeType(item.id)" v-for="(item,i) in typeList" :key="i">{{item.name}}</li>
+        </ul>
+      </el-card>
     </div>
+    <div class="right">
+      <el-card class="list">
+        <div class="info pointer" @click="openDetail(item.id)" v-for="(item,i) in newsList" :key="i" :news="item">
+          <i class="circle"></i>
+          <span class="title" :title="item.title">{{item.title}}</span>
+          <span class="date">{{item.sendDate}}</span>
+        </div>
+        <div class="noData" v-show="total == 0">暂无数据</div>
+        <div class="pagination">
+          <el-pagination class="qz-pagination" @size-change="sizeChange" :page-sizes="[20, 40, 80, 150]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="total" @current-change="changePage">
+          </el-pagination>
+        </div>
+      </el-card>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -47,11 +47,11 @@ export default {
   },
   methods: {
     getNews(id) {
-        let typeid = id
-        if(typeid == ''){
-            typeid = this.newsId
-        }
-   
+      let typeid = id
+      if (typeid == '') {
+        typeid = this.newsId
+      }
+
       this.$ajax
         .get(this.$api.getNewsByType, {
           id: typeid,
@@ -73,7 +73,7 @@ export default {
         }
       })
     },
-    ChangeType(id){
+    ChangeType(id) {
       this.activeId = id
       this.getNews(id)
     },
@@ -81,7 +81,10 @@ export default {
       this.$router.go(-1)
     },
     openDetail(id) {
-      let routeData = this.$router.resolve({path: 'newsDetail', query: { id: id } })
+      let routeData = this.$router.resolve({
+        path: 'newsDetail',
+        query: { id: id }
+      })
       window.open(routeData.href, '_blank')
     },
     changePage(val) {
@@ -116,9 +119,9 @@ export default {
         padding: 10px;
         text-align: center;
       }
-      .actived{
-            color: #ffffff;
-            background: @themeColor;
+      .actived {
+        color: #ffffff;
+        background: @themeColor;
       }
     }
   }
@@ -128,15 +131,24 @@ export default {
     .list {
       .info {
         line-height: 36 * @base;
+        display: flex;
         .circle {
           display: inline-block;
           border-radius: 50%;
           width: 8 * @base;
           height: 8 * @base;
+          margin-top: 15px;
           background: @themeColor;
         }
         .title {
           margin-left: 15 * @base;
+          flex: 1;
+          overflow: hidden;
+          -webkit-line-clamp: 1;
+          text-overflow: ellipsis;
+          word-wrap: break-word;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
         }
         .date {
           float: right;
