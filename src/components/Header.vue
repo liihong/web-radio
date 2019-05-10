@@ -91,23 +91,39 @@ export default {
       index: '',
       isSelectShow: false,
       isSubMenuShow: false,
-      menuData: this.$router.options.routes[0].children,
+      // menuData: this.$router.options.routes[0].children,
+      menuData: [],
       activeMenu: '/'
     }
   },
   mounted() {
-    this.menuData = this.menuData.map(item => {
-      let newObj = Object.assign(item, { isShowSubMenu: false })
-      if (newObj.children) {
-        newObj.children = newObj.children.filter(el => {
-          return !el.hasOwnProperty('hidden')
-        })
-      }
-      return newObj
-    })
+    // this.menuData = this.menuData.map(item => {
+    //   let newObj = Object.assign(item, { isShowSubMenu: false })
+    //   if (newObj.children) {
+    //     newObj.children = newObj.children.filter(el => {
+    //       return !el.hasOwnProperty('hidden')
+    //     })
+    //   }
+    //   return newObj
+    // })
+    this.initData()
     this.activeMenu = this.$route.path
   },
   methods: {
+    initData(){
+      this.$ajax
+        .get(this.$api.getFrontMenus)
+        .then(res => {
+          if (res.data.status === 200) {
+            this.menuData = res.data.content.frontMenus
+          } else {
+            console.log('获取菜单失败!')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
     handleCommand(command) {
       this.$router.push({ path: command })
     },
@@ -166,7 +182,7 @@ export default {
     searchValue() {
       this.changed()
     },
-    $route(form,to){
+    $route(form){
        this.searchValue = form.query.searchValue
     }
   }
