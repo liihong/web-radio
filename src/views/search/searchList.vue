@@ -9,7 +9,7 @@
         </div>
         <div class="right">
             <el-card class="list">
-                <div class="info pointer" @click="openDetail(item.id)" v-for="(item,i) in newsList" :key="i" :news="item">
+                <div class="info pointer"  :title="item.title" @click="openDetail(item.id)" v-for="(item,i) in newsList" :key="i" :news="item">
                     <i class="circle"></i>
                     <span class="title">{{item.title}}</span>
                     <span class="date">{{item.sendDate}}</span>
@@ -136,15 +136,24 @@ export default {
     .list {
       .info {
         line-height: 36 * @base;
+        display: flex;
         .circle {
           display: inline-block;
           border-radius: 50%;
           width: 8 * @base;
           height: 8 * @base;
+          margin-top: 15px;
           background: @themeColor;
         }
         .title {
-          margin-left: 15 * @base;
+           margin-left: 15 * @base;
+          flex: 1;
+          overflow: hidden;
+          -webkit-line-clamp: 1;
+          text-overflow: ellipsis;
+          word-wrap: break-word;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
         }
         .date {
           float: right;
