@@ -160,7 +160,6 @@ export default {
       } else if (hour > 18 && hour <= 23) {
         sc = '晚上'
       }
-      console.log(date + ' ' + getWeek + ' '  + time)
       this.dateValue =
          date + ' ' + getWeek + ' '  + time
     },
