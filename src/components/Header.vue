@@ -20,7 +20,7 @@
       <img src="../assets/imgs/logo.png" height="100">
       <div class="searchGroup">
         <div class="input">
-          <input v-model="searchValue"  @keyup.enter="searchHandler" />
+          <input v-model="searchValue" @keyup.enter="searchHandler" />
           <div class="icon">
             <i class="iconfont icon-dingweiweizhi"></i>
           </div>
@@ -49,10 +49,13 @@
           </ul>
         </div>
       </div>
-    <div style="margin-top:100px;float:right;">
-       <iframe width="250" scrolling="no" height="25" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=10&icon=1&site=12"></iframe>
+       <div style="margin-top: 80px; margin-left: 30px;font-size: 14px;">
+      <div>
+        <i class="el-icon el-icon-date"></i>{{dateValue}}</div>
+      <iframe width="250" scrolling="no" height="25" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=10&icon=1&site=12"></iframe>
     </div>
     </div>
+   
     <div class="menu">
       <ul class="oneLevel">
         <li v-if="!item.hidden" class="oneLi" @click.stop="changeMenu(item, '1')" v-for="(item,index) in menuData" :key="index" :class="(activeMenu == item.path ? 'active' : '')">
@@ -71,7 +74,7 @@ import TopBar from '@/components/TopBar.vue'
 export default {
   name: 'qz-header',
   components: {
-    TopBar,
+    TopBar
   },
   props: {
     logo: {
@@ -96,24 +99,29 @@ export default {
       isSubMenuShow: false,
       // menuData: this.$router.options.routes[0].children,
       menuData: [],
-      activeMenu: '/'
+      activeMenu: '/',
+      dateValue: this.getDate(),
+      timer: null
     }
   },
   mounted() {
-    // this.menuData = this.menuData.map(item => {
-    //   let newObj = Object.assign(item, { isShowSubMenu: false })
-    //   if (newObj.children) {
-    //     newObj.children = newObj.children.filter(el => {
-    //       return !el.hasOwnProperty('hidden')
-    //     })
-    //   }
-    //   return newObj
-    // })
     this.initData()
     this.activeMenu = this.$route.path
   },
+  created() {
+   //定时器：当前时间
+   this.timer = setInterval(() => {
+      this.dateTime = this.getDate();
+   }, 1000);
+},
+  beforeDestroy() {
+   //在vue实例销毁前，清除定时器
+   if (this.timer) {
+      clearInterval(this.timer);
+   }
+},
   methods: {
-    initData(){
+    initData() {
       this.$ajax
         .get(this.$api.getFrontMenus)
         .then(res => {
@@ -126,6 +134,35 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    getDate() {
+      var now = new Date()
+      var nowTime = now.toLocaleString()
+      var date = nowTime.substring(0, 10) //截取日期
+      var time = nowTime.substring(10, 20) //截取时间
+      var week = now.getDay() //星期
+      var hour = now.getHours() //小时
+      //判断星期几
+      var weeks = ['日', '一', '二', '三', '四', '五', '六']
+      var getWeek = '星期' + weeks[week]
+      var sc
+      //判断是AM or PM
+      if (hour >= 0 && hour < 5) {
+        sc = '凌晨'
+      } else if (hour > 5 && hour <= 7) {
+        sc = '早上'
+      } else if (hour > 7 && hour <= 11) {
+        sc = '上午'
+      } else if (hour > 11 && hour <= 13) {
+        sc = '中午'
+      } else if (hour > 13 && hour <= 18) {
+        sc = '下午'
+      } else if (hour > 18 && hour <= 23) {
+        sc = '晚上'
+      }
+      console.log(date + ' ' + getWeek + ' '  + time)
+      this.dateValue =
+         date + ' ' + getWeek + ' '  + time
     },
     handleCommand(command) {
       this.$router.push({ path: command })
@@ -143,7 +180,10 @@ export default {
     // 点击搜索
     searchHandler() {
       this.$store.commit('searchValue', this.searchValue)
-      this.$router.push({ path: '/search', query: {searchValue : this.searchValue} })
+      this.$router.push({
+        path: '/search',
+        query: { searchValue: this.searchValue }
+      })
     },
     onHeadClick() {
       this.menuData.map(item => {
@@ -178,15 +218,15 @@ export default {
     selected: function(obj) {
       this.selectedObj = obj
       this.$router.push({ path: '/peopleDetail', query: { id: obj.id } })
-       this.suggestions = []
-    },
+      this.suggestions = []
+    }
   },
   watch: {
     searchValue() {
       this.changed()
     },
-    $route(form){
-       this.searchValue = form.query.searchValue
+    $route(form) {
+      this.searchValue = form.query.searchValue
     }
   }
 }
@@ -234,14 +274,14 @@ export default {
         }
         .icon {
           transform: scale(1.8);
-          color: #7D0000;
+          color: #7d0000;
           display: inline-block;
         }
       }
       .searchBtn {
         width: 100 * @base;
         text-align: center;
-        background: #7D0000;
+        background: #7d0000;
         border-radius: 2px;
         .icon {
           transform: scale(1.5);
@@ -267,7 +307,7 @@ export default {
       height: auto;
       .oneLi {
         float: left;
-        width: 180*@base;
+        width: 180 * @base;
         cursor: pointer;
         text-align: center;
         // span {
@@ -275,7 +315,7 @@ export default {
         // }
       }
       .active {
-        background: #7D0000;
+        background: #7d0000;
       }
     }
     .towLevel {
@@ -288,7 +328,7 @@ export default {
       transition: height 3s;
       box-shadow: 0 1px 4px 0 #9dc0db;
       li:hover {
-        color: #7D0000;
+        color: #7d0000;
       }
     }
   }
