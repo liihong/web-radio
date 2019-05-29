@@ -49,6 +49,9 @@
           </ul>
         </div>
       </div>
+    <div style="margin-top:100px;float:right;">
+       <iframe width="250" scrolling="no" height="25" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=10&icon=1&site=12"></iframe>
+    </div>
     </div>
     <div class="menu">
       <ul class="oneLevel">
