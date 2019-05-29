@@ -145,21 +145,6 @@ export default {
       //判断星期几
       var weeks = ['日', '一', '二', '三', '四', '五', '六']
       var getWeek = '星期' + weeks[week]
-      var sc
-      //判断是AM or PM
-      if (hour >= 0 && hour < 5) {
-        sc = '凌晨'
-      } else if (hour > 5 && hour <= 7) {
-        sc = '早上'
-      } else if (hour > 7 && hour <= 11) {
-        sc = '上午'
-      } else if (hour > 11 && hour <= 13) {
-        sc = '中午'
-      } else if (hour > 13 && hour <= 18) {
-        sc = '下午'
-      } else if (hour > 18 && hour <= 23) {
-        sc = '晚上'
-      }
       this.dateValue =
          date + ' ' + getWeek + ' '  + time
     },
