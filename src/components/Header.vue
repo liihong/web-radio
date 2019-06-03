@@ -49,10 +49,10 @@
           </ul>
         </div>
       </div>
-       <div style="margin-top: 80px; margin-left: 30px;font-size: 14px;">
-      <div>
-        <i class="el-icon el-icon-date"></i>{{dateValue}}</div>
-      <iframe width="250" scrolling="no" height="25" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=10&icon=1&site=12"></iframe>
+       <div style="margin-top: 80px; margin-left: 30px;font-size: 14px;" v-html="dateValue">
+      <!-- <div>
+        <i class="el-icon el-icon-date"></i><span id="setDate"></span></div>
+      <iframe width="250" scrolling="no" height="25" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=10&icon=1&site=12"></iframe> -->
     </div>
     </div>
    
@@ -100,7 +100,7 @@ export default {
       // menuData: this.$router.options.routes[0].children,
       menuData: [],
       activeMenu: '/',
-      dateValue: this.getDate(),
+      dateValue: '',
       timer: null
     }
   },
@@ -108,18 +108,6 @@ export default {
     this.initData()
     this.activeMenu = this.$route.path
   },
-  created() {
-   //定时器：当前时间
-   this.timer = setInterval(() => {
-      this.dateTime = this.getDate();
-   }, 1000);
-},
-  beforeDestroy() {
-   //在vue实例销毁前，清除定时器
-   if (this.timer) {
-      clearInterval(this.timer);
-   }
-},
   methods: {
     initData() {
       this.$ajax
@@ -134,19 +122,34 @@ export default {
         .catch(err => {
           console.log(err)
         })
+         this.$ajax
+        .get(this.$api.getHTML, {
+          type: 10
+        })
+        .then(res => {
+          if (res.data.status === 200) {
+            let data = res.data.content
+            this.dateValue = data.html
+            this.$nextTick(()=>{
+               this.getDate()
+            })
+          } else {
+            console.log('轮播图列表数据请求失败!')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     getDate() {
       var now = new Date()
       var nowTime = now.toLocaleString()
       var date = nowTime.substring(0, 10) //截取日期
-      var time = nowTime.substring(10, 20) //截取时间
       var week = now.getDay() //星期
-      var hour = now.getHours() //小时
       //判断星期几
       var weeks = ['日', '一', '二', '三', '四', '五', '六']
       var getWeek = '星期' + weeks[week]
-      this.dateValue =
-         date + ' ' + getWeek + ' '  + time
+      document.getElementById('setDate').innerHTML = date + ' ' + getWeek + ' '
     },
     handleCommand(command) {
       this.$router.push({ path: command })
