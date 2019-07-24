@@ -49,13 +49,13 @@
           </ul>
         </div>
       </div>
-       <div style="margin-top: 80px; margin-left: 30px;font-size: 14px;" v-html="dateValue">
-      <!-- <div>
+      <div style="margin-top: 80px; margin-left: 30px;font-size: 14px;" v-html="dateValue">
+        <!-- <div>
         <i class="el-icon el-icon-date"></i><span id="setDate"></span></div>
       <iframe width="250" scrolling="no" height="25" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=10&icon=1&site=12"></iframe> -->
+      </div>
     </div>
-    </div>
-   
+
     <div class="menu">
       <ul class="oneLevel">
         <li v-if="!item.hidden" class="oneLi" @click.stop="changeMenu(item, '1')" v-for="(item,index) in menuData" :key="index" :class="(activeMenu == item.path ? 'active' : '')">
@@ -122,7 +122,7 @@ export default {
         .catch(err => {
           console.log(err)
         })
-         this.$ajax
+      this.$ajax
         .get(this.$api.getHTML, {
           type: 10
         })
@@ -130,8 +130,8 @@ export default {
           if (res.data.status === 200) {
             let data = res.data.content
             this.dateValue = data.html
-            this.$nextTick(()=>{
-               this.getDate()
+            this.$nextTick(() => {
+              this.getDate()
             })
           } else {
             console.log('轮播图列表数据请求失败!')
@@ -142,14 +142,23 @@ export default {
         })
     },
     getDate() {
-      var now = new Date()
-      var nowTime = now.toLocaleString()
-      var date = nowTime.substring(0, 10) //截取日期
-      var week = now.getDay() //星期
+      var date = new Date()
+      var seperator1 = '-'
+      var year = date.getFullYear()
+      var month = date.getMonth() + 1
+      var strDate = date.getDate()
+      if (month >= 1 && month <= 9) {
+        month = '0' + month
+      }
+      if (strDate >= 0 && strDate <= 9) {
+        strDate = '0' + strDate
+      }
+      var currentdate = year + '年'   + month + '月' + strDate + '日'
+      var week = date.getDay() //星期
       //判断星期几
       var weeks = ['日', '一', '二', '三', '四', '五', '六']
       var getWeek = '星期' + weeks[week]
-      document.getElementById('setDate').innerHTML = date + ' ' + getWeek + ' '
+      document.getElementById('setDate').innerHTML = currentdate + ' ' + getWeek + ' '
     },
     handleCommand(command) {
       this.$router.push({ path: command })
