@@ -2,12 +2,12 @@
   <div class="home">
     <!--广告位1-->
     <!-- <div v-html="Advertising1"></div> -->
-    <div class="row1">
-      <h1>
+    <div class="row1" v-html="topNews">
+      <!-- <h1>
         <router-link :to="{ path: 'newsDetail', query: { id: topNews.id }}" target="_blank">
           {{topNews.title}}
         </router-link>
-      </h1>
+      </h1> -->
       <div class="subHeadline">
         <router-link target="_blank" :to="{ path: 'newsDetail', query: { id: item.id }}" v-for="(item, $index) in topNewsTwo" :key="$index">{{item.title}} &nbsp;&nbsp;&nbsp;</router-link>
       </div>
@@ -25,7 +25,7 @@
     <div class="line2">
       <div class="block1">
         <NewsCard :newTypes="newTypes[1]" :newsList="newsList[20]" @moreClick="moreClick(newTypes[1])" :count="10"></NewsCard>
-       <Advertising  v-for="(item,i) in Advertising2" :key="i" :item="item" :height="150"/>
+        <Advertising v-for="(item,i) in Advertising2" :key="i" :item="item" :height="150" />
         <NewsCard :newTypes="newTypes[2]" :newsList="newsList[21]" @moreClick="moreClick(newTypes[2])" :count="3"></NewsCard>
       </div>
       <div class="block2">
@@ -43,7 +43,7 @@
       <NewsCard :newTypes="newTypes[5]" showImg :newsList="newsList[24]" class="block1" @moreClick="moreClick(newTypes[5])"></NewsCard>
     </div>
     <div class="line2">
-      <Card name="主持人"  @moreClick="openPeople()">
+      <Card name="主持人" @moreClick="openPeople()">
         <picSwiper :picData="peopleList"></picSwiper>
       </Card>
     </div>
@@ -80,9 +80,9 @@ export default {
   },
   computed: {
     topTitleName() {
-      if(this.newTypes && this.newTypes.length > 0) {
+      if (this.newTypes && this.newTypes.length > 0) {
         return this.newTypes[0]['name']
-      } else{
+      } else {
         return '许昌新闻'
       }
     }
@@ -95,17 +95,17 @@ export default {
   },
   methods: {
     moreClick(item) {
-      this.$router.push({path: '/newsList', query: { id: item.id }})
+      this.$router.push({ path: '/newsList', query: { id: item.id } })
     },
     openPeople() {
-      this.$router.push({path: '/peopleList'})
+      this.$router.push({ path: '/peopleList' })
     },
     sliderlist() {
       this.$ajax
         .get(this.$api.getHome)
         .then(res => {
           if (res.data.status === 200) {
-            let data =  res.data.content
+            let data = res.data.content
             this.slides = data.shufflingImages
             // this.Advertising1 = data.topImages
             // this.Advertising2 = data.centerImages
@@ -116,14 +116,14 @@ export default {
         .catch(err => {
           console.log(err)
         })
-        this.$ajax
-        .get(this.$api.getHTML,{
-          type:3
+      this.$ajax
+        .get(this.$api.getHTML, {
+          type: 3
         })
         .then(res => {
           if (res.data.status === 200) {
-            let data =  res.data.content
-            this.Advertising1 = data.html 
+            let data = res.data.content
+            this.Advertising1 = data.html
           } else {
             console.log('轮播图列表数据请求失败!')
           }
@@ -152,51 +152,49 @@ export default {
       })
     },
     getTopNews() {
-      this.$ajax.get(this.$api.getTopOne).then(res => {
-        if (res.data.status === 200) {
-          this.topNews = res.data.content.topOne[0]
-          if(this.topNews.title.length> 32)
-          {this.topNews.title = this.topNews.title.substr(0,31)+ '...'}
-          this.topNewsTwo = res.data.content.topOne.slice(1,3)
-        } else {
-          console.log('头条数据获取失败!')
-        }
-      })
+      this.$ajax
+        .get(this.$api.getHTML, {
+          type: 5
+        })
+        .then(res => {
+          if (res.data.status === 200) {
+            this.topNews = res.data.content.html
+          } else {
+            console.log('轮播图列表数据请求失败!')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less" >
 .home {
   position: relative;
   .row1 {
-    margin-top: 10*@base;
+    p {font-size:18px !important;
+    span{font-size:18px !important;}}
+    margin-top: 10 * @base;
     position: relative;
     background-color: #fafafa;
     border: 1px solid #dcdcdc;
     h1 {
       text-align: center;
       height: 36px;
-      font-size: 45*@base;
+      font-size: 45 * @base;
       font-weight: 900;
       padding: 14px 0;
     }
     .subHeadline {
-      height: 14*@base;
+      height: 14 * @base;
       text-align: center;
       padding: 7px 0;
     }
-    span {
-      position: absolute;
-      left: -1px;
-      top: -4px;
-      // background: url(../../assets/imgs/index.png) no-repeat -68*@base 0;
-      height: 104*@base;
-      width: 102*@base;
-    }
   }
   .line1 {
-    margin-top: 10*@base;
+    margin-top: 10 * @base;
     .newsTab {
       .newsTitle {
         h1 {
@@ -216,10 +214,10 @@ export default {
   }
   .line2 {
     .block1 {
-      margin:10*@base;
+      margin: 10 * @base;
     }
     .block2 {
-      margin:10*@base;
+      margin: 10 * @base;
     }
   }
 }
