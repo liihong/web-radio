@@ -174,8 +174,13 @@ export default {
 .home {
   position: relative;
   .row1 {
-    p {font-size:18px !important;
-    span{font-size:18px !important;}}
+    cursor: pointer;
+    p:first-child {
+      font-size: 18px !important;
+      span {
+        font-size: 18px !important;
+      }
+    }
     margin-top: 10 * @base;
     position: relative;
     background-color: #fafafa;
