@@ -80,6 +80,7 @@ export default {
         .then(res => {
           if (res.data && res.data.content) {
             this.topic = res.data.content.zhuanti
+              document.title=this.topic.name
           }
         })
     },
