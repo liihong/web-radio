@@ -15,7 +15,7 @@
 -->
 <template>
   <div class="header" @click.stop="onHeadClick">
-    <top-bar/>
+    <!-- <top-bar/> -->
     <div class="search">
       <img src="../assets/imgs/logo.png" height="100">
       <div class="searchGroup">
@@ -143,7 +143,6 @@ export default {
     },
     getDate() {
       var date = new Date()
-      var seperator1 = '-'
       var year = date.getFullYear()
       var month = date.getMonth() + 1
       var strDate = date.getDate()
@@ -229,11 +228,11 @@ export default {
 </script>
 <style lang="less" scoped>
 .header {
+   max-width: @maxWidth;
+    margin: 0 auto;
   .search {
     background: #ffffff;
     height: 130 * @base;
-    max-width: @maxWidth;
-    margin: 0 auto;
     padding: 10 * @base 0 10 * @base 150 * @base;
     display: flex;
     align-items: center;
