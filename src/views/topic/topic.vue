@@ -54,6 +54,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .peopleList {
+  padding:20px;
   .list{
     .cover {
       margin: 8 * @base 10*@base;

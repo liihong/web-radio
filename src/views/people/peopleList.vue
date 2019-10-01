@@ -50,6 +50,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .peopleList {
+  padding:20px;
   .list {
     .cover {
       width: 2.5rem;

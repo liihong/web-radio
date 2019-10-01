@@ -75,5 +75,6 @@ export default {
 </script>
 <style lang="less" scoped>
 .newsList {
+  padding:20px;
 }
 </style>

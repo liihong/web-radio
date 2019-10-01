@@ -59,6 +59,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .peopleList {
+  padding:20px;
   .list {
     .content{
       position: relative;

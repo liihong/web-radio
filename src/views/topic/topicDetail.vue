@@ -100,6 +100,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .topicDetail {
+  padding:20px;
   .zhuantiname{
     text-align: center;
       h1{

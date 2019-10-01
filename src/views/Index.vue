@@ -39,7 +39,7 @@ export default {
         .get(this.$api.getBackground)
         .then(res => {
           if (res.data.status === 200) {
-            if(res.data.content !=''){
+            if(res.data.content!= null && res.data.content !=''){
               let arr = res.data.content.style.split(';')
               arr.map(item=>{
                 let obj = item.split(':')
@@ -65,13 +65,16 @@ export default {
   width: 100%;
   height: 100%;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   .main {
     width: 100%;
-    // background: #F6F8FB;
+    margin: 0 auto;
+    max-width: @maxWidth;
+    background: #ffffff;
     .router-view {
       height: 100%;
       margin: 0 auto;
-      max-width: @maxWidth;
     }
   }
 }
