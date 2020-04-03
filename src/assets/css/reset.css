@@ -46,6 +46,7 @@ KISSY CSS Reset
  :focus {outline: none;}
 html{
   height: 100%;
+  filter: grayscale(100%); -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: url("data:image/svg+xml;utf8,#grayscale"); filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); -webkit-filter: grayscale(1);
 }
  body {
    -webkit-font-smoothing: antialiased;

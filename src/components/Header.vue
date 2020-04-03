@@ -276,7 +276,7 @@ export default {
       .searchBtn {
         width: 100 * @base;
         text-align: center;
-        background: #7d0000;
+        background: @themeColor;
         border-radius: 2px;
         .icon {
           transform: scale(1.5);
