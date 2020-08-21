@@ -280,6 +280,7 @@ export default {
         border-radius: 2px;
         .icon {
           transform: scale(1.5);
+          margin-top:12*@base;
         }
       }
     }

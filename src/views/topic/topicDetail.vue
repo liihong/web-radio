@@ -1,5 +1,6 @@
 <template>
   <div class="topicDetail">
+   
     <el-row class="list" :gutter="20">
       <el-col>
         <el-row>
