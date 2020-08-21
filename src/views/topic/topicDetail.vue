@@ -88,7 +88,7 @@ export default {
       this.$router.go(-1)
     },
     openDetail(id) {
-      this.$router.push({ path: 'topicDetail', query: { id: id } })
+      this.$router.push({ path: 'topicDetail', query: { id: id,name: this.topic.name } })
     }
   },
   mounted() {

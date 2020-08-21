@@ -1,5 +1,14 @@
 <template>
   <div>
+    <el-row style="margin-top:20px;">
+      <el-col>
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item>首页</el-breadcrumb-item>  
+          <el-breadcrumb-item>专题</el-breadcrumb-item>  
+          <el-breadcrumb-item>{{$route.query.name}}</el-breadcrumb-item>
+        </el-breadcrumb>
+      </el-col>
+    </el-row>
     <Card class="newsDetail">
       <div class="news-title">
         <h1>{{newsDetail.title}}</h1>

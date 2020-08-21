@@ -3,7 +3,7 @@
      <Header class="header"></Header>
     <div class="main">
       <section class="content-container">
-          <Breadcrumb v-if="$route.path !== '/index'"></Breadcrumb>
+          <Breadcrumb v-if="$route.path !== '/index' && $route.path !== '/topicDetail'"></Breadcrumb>
          <router-view class="router-view"></router-view>
       </section>
     </div>
