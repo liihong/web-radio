@@ -23,6 +23,10 @@
 <script>
 import Card from './Card'
 import unknown from '../assets/imgs/unknown.svg'
+import jiankang from '../assets/imgs/jiankang.jpeg'
+import lvyou from '../assets/imgs/lvyou.jpeg'
+import qiche from '../assets/imgs/qiche.jpeg'
+
 export default {
   components: {
     Card
@@ -73,9 +77,17 @@ export default {
     },
     imgSrc() {
       let img = ''
+      if(this.newTypes && this.newTypes.id === 23){
+        return jiankang
+      }else if(this.newTypes && this.newTypes.id === 24){
+        return lvyou
+      }else if(this.newTypes && this.newTypes.id === 22){
+        return qiche
+      }
       if (this.newsList && this.newsList.length > 0) {
+
         this.newsList.map(item => {
-          if (item.displayType && item.displayType['key'] == 'DNORMAL') {
+          if (item.displayType && item.displayType == 'DNORMAL') {
             img = this.$api.IMG_URL + item.cfImage
           }
         })
