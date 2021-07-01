@@ -89,6 +89,9 @@ export default {
       return this.$route.query.id
     }
   },
+  mounted(){
+    console.log(this.$route)
+  },
   methods: {
     getPeopleList() {
       this.$ajax
@@ -126,7 +129,8 @@ export default {
     this.getPeopleList()
   },
   watch: {
-    $route() {
+    $route(to) {
+      console.log(to)
       this.getDetail()
       this.getPeopleList()
     }

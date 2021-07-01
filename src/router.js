@@ -10,7 +10,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: '首页',
+      name: '',
       component: Index,
       children: [{
           path: '/',
@@ -55,66 +55,66 @@ export default new Router({
           name: 'FM92.6',
           hidden: true,
           meta: {id: 3},
-          component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
+          component: () => import( './views/radio/radio')
         },{
           path: '/am1287',
           name: 'AM1287',
           meta: {id: 5},
           hidden: true,
-          component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
+          component: () => import( './views/radio/radio')
         },{
           path: '/fm102',
           name: 'FM102',
           meta: {id: 4},
           hidden: true,
-          component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
+          component: () => import( './views/radio/radio')
         },{
           path: '/am927',
           name: 'AM927',
           meta: {id: 2},
           hidden: true,
-          component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/radio/radio')
+          component: () => import( './views/radio/radio')
         },{
           path: '/seminar',
           name: '专题',
-          component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/people/peopleIndex'),
+          component: () => import( './views/people/peopleIndex'),
           children: [
             {
               path: '/',
               name: '专题列表',
               hidden: true,
-              component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/topic/topic')
+              component: () => import( './views/topic/topic')
             },{
               path: '/seminarDetail',
               name: '专题详情',
               hidden: true,
-              component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/topic/topicDetail')
+              component: () => import( './views/topic/topicDetail')
             }
           ]
         },{
           path: '/peopleList',
           name: '主持人',
-          component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/people/peopleIndex'),
+          component: () => import( './views/people/peopleIndex'),
           children: [{
             path: '/',
             name: '主持人列表',
             hidden: true,
-            component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/people/peopleList')
+            component: () => import( './views/people/peopleList')
           },{
             path: '/peopleDetail',
-            name: 'XX',
+            name: '主持人详情',
             hidden: true,
-            component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/people/peopleDetail'),
+            component: () => import( './views/people/peopleDetail'),
           }]
         },{
           path: '/video',
           name: '视频',
-          component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/video/video')
+          component: () => import( './views/video/video')
         },{
           path: '/videoDetail',
           name: '视频',
           hidden: true,
-          component: () => import(/* webpackChunkName: 'PeopleDetail' */ './views/video/videoDetail')
+          component: () => import( './views/video/videoDetail')
         }
       ]
     },

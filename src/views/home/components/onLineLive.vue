@@ -4,7 +4,7 @@
         <img class="pointer" :class="{'activeImgage': activeLive == 3}" @click="changeChannels(3)" src="../../../assets/imgs/926.jpg">
         <img class="pointer" :class="{'activeImgage': activeLive == 4}" @click="changeChannels(4)" src="../../../assets/imgs/102.jpg">
         <img class="pointer" :class="{'activeImgage': activeLive == 5}" @click="changeChannels(5)" src="../../../assets/imgs/1287.jpg">
-        <img class="pointer" :class="{'activeImgage': activeLive == 2}" @click="changeChannels(2)" src="../../../assets/imgs/927.jpg">
+        <!-- <img class="pointer" :class="{'activeImgage': activeLive == 2}" @click="changeChannels(2)" src="../../../assets/imgs/927.jpg"> -->
     </div>
     <div class="jiemu">
       <ul>
