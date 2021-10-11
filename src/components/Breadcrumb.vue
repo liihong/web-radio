@@ -10,10 +10,10 @@
    */
 -->
 <template>
-  <div class="breadcrumb">
-      <span v-if="item.name != '首页'" v-for="(item,index) in $route.matched" :key="item.path">
-        {{item.name }}
-        <i v-if="index !== $route.matched.length-1" class="el-icon-arrow-right"></i>
+  <div v-if="$route.path!='/'" class="breadcrumb">
+      <span v-for="(item,index) in $route.matched" :key="item.path">
+        <template>{{item.name }}</template>
+        <i v-if="index !== $route.matched.length-1 && index!=0" class="el-icon-arrow-right"></i>
       </span>
   </div>
 </template>

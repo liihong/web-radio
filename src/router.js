@@ -14,7 +14,7 @@ export default new Router({
       component: Index,
       children: [{
           path: '/',
-          name: '首页',
+          name: '',
           component: () => import(/* webpackChunkName: 'Home' */ './views/home/Home')
         },
         {
