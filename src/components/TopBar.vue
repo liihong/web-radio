@@ -15,7 +15,7 @@
 -->
 <template>
   <div class="header">
-    <h1>XCR许昌广播网</h1>
+    <h1>许昌广播电视台-许昌广播网</h1>
   </div>
 </template>
 
